@@ -7,7 +7,7 @@ brew "fd"
 brew "ripgrep"
 brew "imagemagick"
 brew "ffmpeg"
-brew "stats"
+cask "stats"
 
 # Dev
 brew "docker-compose"

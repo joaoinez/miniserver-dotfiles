@@ -1,0 +1,12 @@
+version: "3"
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "11433:8080"
+    volumes:
+      - ~/.open-webui:/app/backend/data
+    environment:
+      - WEBUI_AUTH=False
+volumes:
+  open-webui:
