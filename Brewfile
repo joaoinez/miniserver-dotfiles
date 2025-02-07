@@ -10,7 +10,6 @@ brew "ffmpeg"
 cask "stats"
 
 # Dev
-brew "docker-compose"
 brew "lazydocker"
 brew "neovim"
 brew "uv"
