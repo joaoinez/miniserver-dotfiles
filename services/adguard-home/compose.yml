@@ -11,8 +11,8 @@ services:
       - 8080:80/tcp
     restart: unless-stopped
     volumes:
-      - ${DOCKER_VOLUME_STORAGE:-~/container-volume}/adguard-home/work:/opt/adguardhome/work
-      - ${DOCKER_VOLUME_STORAGE:-~/container-volume}/adguard-home/conf:/opt/adguardhome/conf
+      - ~/container-volume/adguard-home/work:/opt/adguardhome/work
+      - ~/container-volume/adguard-home/conf:/opt/adguardhome/conf
     #networks:
     #  - proxy
     #labels:
