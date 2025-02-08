@@ -1,5 +1,10 @@
 # Miniserver
 
+## DNS
+
+<https://developers.cloudflare.com/1.1.1.1/ip-addresses/>
+<https://quad9.net/>
+
 ## Setup
 
 ### Install `git`
