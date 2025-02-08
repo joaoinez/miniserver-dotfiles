@@ -118,7 +118,6 @@ alias parrot="curl parrot.live"
 eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(fnm env --use-on-cd --shell zsh)"
 
 # █▀▀ ▀█ █▀▀
 # █▀░ █▄ █▀░
