@@ -7,7 +7,7 @@ api:
   insecure: false
 
 log:
-  level: ERROR
+  level: INFO
 accessLog:
   filePath: "/logs/traefik.log"
   format: json
