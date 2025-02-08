@@ -19,7 +19,7 @@ services:
       - traefik.enable=true
       - traefik.docker.network=proxy
       - traefik.http.routers.adguard.rule=Host(`dns.miniserver.home.arpa`)
-      - traefik.http.services.openwebui.loadbalancer.server.port=80
+      - traefik.http.services.adguard.loadbalancer.server.port=8080
 
 networks:
   proxy:
