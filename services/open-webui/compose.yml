@@ -14,7 +14,7 @@ services:
       - traefik.docker.network=proxy
       - traefik.http.routers.openwebui.rule=Host(`chat.miniserver.home.arpa`)
       - traefik.http.services.openwebui.loadbalancer.server.port=8080
-      # - traefik.http.routers.adguard.middlewares=local-ipwhitelist@file
+      # - traefik.http.routers.openwebui.middlewares=local-ipwhitelist@file
 
 volumes:
   open-webui:
