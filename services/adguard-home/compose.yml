@@ -13,14 +13,3 @@ services:
     volumes:
       - ~/container-volume/adguard-home/work:/opt/adguardhome/work
       - ~/container-volume/adguard-home/conf:/opt/adguardhome/conf
-    networks:
-      - proxy
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=proxy
-      - traefik.http.routers.adguard.rule=Host(`dns.miniserver.home.arpa`)
-      - traefik.http.services.adguard.loadbalancer.server.port=8080
-
-networks:
-  proxy:
-    external: true
