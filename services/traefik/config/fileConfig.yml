@@ -16,5 +16,3 @@ http:
 
     basic-auth:
       basicAuth:
-        # https://hostingcanada.org/htpasswd-generator/
-        users: "admin:$$apr1$$epoKf5li$$QfTMJZOCS/halv3CiIUEu0" # admin:password
