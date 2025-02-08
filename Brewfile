@@ -18,10 +18,10 @@ brew "chafa"
 brew "inetutils"
 brew "ffmpeg"
 brew "ollama"
-
-# Casks
 brew "lazydocker"
 brew "neovim"
+
+# Casks
 cask "orbstack"
 cask "stats"
 cask "lm-studio"
