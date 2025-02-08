@@ -1,0 +1,39 @@
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
+
+api:
+  dashboard: true
+  insecure: true
+
+log:
+  level: ERROR
+accessLog:
+  filePath: "/logs/traefik.log"
+  format: json
+  filters:
+    statusCodes:
+      - "200-299"
+      - "400-599"
+  bufferingSize: 0
+  fields:
+    headers:
+      defaultMode: drop
+      names:
+        User-Agent: keep
+
+serverTransport:
+  insecureSkipVerify: true
+
+providers:
+  providersThrottleDuration: 2s
+
+  file:
+    filename: /etc/traefik/fileConfig.yml
+    watch: true
+
+  docker:
+    watch: true
+    network: proxy
+    defaultRule: 'Host(`{{ index .Labels "com.docker.compose.service"}}.miniserver.home.arpa`)'
+    exposedByDefault: false
