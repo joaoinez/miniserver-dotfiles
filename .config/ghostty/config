@@ -1,0 +1,18 @@
+theme = catppuccin-mocha
+
+cursor-color = ff0017
+
+font-family = "Hack Nerd Font Mono"
+font-feature = -liga
+font-thicken = true
+
+background-opacity = 0.82
+background-blur-radius = 10
+
+macos-option-as-alt = true
+
+keybind = alt+h=unbind
+keybind = alt+j=unbind
+keybind = alt+k=unbind
+keybind = alt+l=unbind
+keybind = alt+space=unbind
