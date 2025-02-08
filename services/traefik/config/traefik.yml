@@ -7,7 +7,7 @@ api:
   insecure: true
 
 log:
-  level: INFO
+  level: ERROR
 accessLog:
   filePath: "/logs/traefik.log"
   format: json
@@ -35,5 +35,4 @@ providers:
   docker:
     watch: true
     network: proxy
-    defaultRule: 'Host(`{{ index .Labels "com.docker.compose.service"}}.miniserver.home.arpa`)'
     exposedByDefault: false

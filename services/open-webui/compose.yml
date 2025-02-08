@@ -3,6 +3,7 @@ services:
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: openwebui
+    restart: unless-stopped
     volumes:
       - ~/container-volume/open-webui:/app/backend/data
     environment:
@@ -14,7 +15,6 @@ services:
       - traefik.docker.network=proxy
       - traefik.http.routers.openwebui.rule=Host(`chat.miniserver.home.arpa`)
       - traefik.http.services.openwebui.loadbalancer.server.port=8080
-      # - traefik.http.routers.openwebui.middlewares=local-ipwhitelist@file
 
 volumes:
   open-webui:
