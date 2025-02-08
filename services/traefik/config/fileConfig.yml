@@ -16,4 +16,5 @@ http:
 
     basic-auth:
       basicAuth:
-        users: "admin:$apr1$epoKf5li$QfTMJZOCS/halv3CiIUEu0"
+        # users: "admin:$apr1$epoKf5li$QfTMJZOCS/halv3CiIUEu0"
+        usersFile: "/etc/traefik/usersFile.txt"

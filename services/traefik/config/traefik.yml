@@ -26,7 +26,7 @@ accessLog:
 #   insecureSkipVerify: true
 
 providers:
-  # providersThrottleDuration: 2s
+  providersThrottleDuration: 2s
 
   file:
     filename: /etc/traefik/fileConfig.yml
