@@ -2,24 +2,12 @@
 services:
   traefik:
     image: traefik:v3.3
-    container_name: traefik
-    restart: unless-stopped
+    command: --api.insecure=true --providers.docker
     ports:
-      - 80:80/tcp
-      - 8081:8080
+      - "80:80"
+      - "8081:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/traefik:/etc/traefik/
-      - ~/container-volume/traefik/logs:/logs
-    environment:
-      - TZ=Europe/Amsterdam
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.api.rule=Host(`traefik.miniserver.home.arpa`)
-      - traefik.http.routers.api.service=api@internal
-      - traefik.http.routers.api.middlewares=local-ipwhitelist@file
-    networks:
-      - proxy
+      - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   proxy:
