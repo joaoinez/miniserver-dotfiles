@@ -5,9 +5,12 @@ sections:
     widgets:
       - type: clock
         options:
-          timeZone: Europe/London
+          timeZone: Europe/Amsterdam
           format: en-GB
           hideDate: false
+      - type: xkcd-comic
+        options:
+          comic: random
   - name: Example Section
     icon: far fa-rocket
     items:
