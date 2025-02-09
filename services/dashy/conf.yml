@@ -1,6 +1,33 @@
 pageInfo:
   title: Mini Server
 sections:
+  - name: Local Time
+    widgets:
+      - type: clock
+        options:
+          timeZone: Europe/Amsterdam
+          format: en-GB
+          hideDate: false
+  - name: External Services
+    items:
+      - title: GitHub
+        description: Miniserver config
+        icon: favicon
+        url: https://github.com/JoaoInez/miniserver-dotfiles
+  - name: Local Services
+    items:
+      - title: Perplexica
+        icon: favicon
+        url: http://search.mini.home.arpa
+  - name: System
+    widgets:
+      - type: gl-alerts
+        options:
+          hostname: http://192.168.178.45:61208
+      - type: gl-network-traffic
+        options:
+          hostname: http://192.168.178.45:61208
+          limit: 500
   - name: CPU
     widgets:
       - type: gl-current-cpu
@@ -22,26 +49,3 @@ sections:
         options:
           hostname: http://192.168.178.45:61208
           limit: 80
-      - type: gl-disk-space
-        options:
-          hostname: http://192.168.178.45:61208
-  - name: Network
-    widgets:
-      - type: gl-network-interfaces
-        options:
-          hostname: http://192.168.178.45:61208
-      - type: gl-network-traffic
-        options:
-          hostname: http://192.168.178.45:61208
-          limit: 500
-  - name: External Services
-    items:
-      - title: GitHub
-        description: Miniserver config
-        icon: favicon
-        url: https://github.com/JoaoInez/miniserver-dotfiles
-  - name: Local Services
-    items:
-      - title: Perplexica
-        icon: favicon
-        url: http://search.mini.home.arpa
