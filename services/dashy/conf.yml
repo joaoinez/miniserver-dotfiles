@@ -1,6 +1,11 @@
 pageInfo:
   title: Home Lab
 sections:
+  - type: clock
+    options:
+      timeZone: Europe/London
+      format: en-GB
+      hideDate: false
   - name: Example Section
     icon: far fa-rocket
     items:
@@ -14,11 +19,6 @@ sections:
         url: https://github.com/Lissy93/dashy/issues
   - name: Local Services
     items:
-      - type: clock
-        options:
-          timeZone: Europe/London
-          format: en-GB
-          hideDate: false
       - title: Perplexica
         icon: fab fa-github
         url: http://search.mini.home.arpa
