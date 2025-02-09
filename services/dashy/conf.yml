@@ -17,7 +17,7 @@ sections:
   - name: Local Services
     items:
       - title: Perplexica
-        icon: favicon
+        icon: generative
         url: http://search.mini.home.arpa
   - name: System
     widgets:
@@ -31,9 +31,6 @@ sections:
   - name: CPU
     widgets:
       - type: gl-current-cpu
-        options:
-          hostname: http://192.168.178.45:61208
-      - type: gl-current-cores
         options:
           hostname: http://192.168.178.45:61208
       - type: gl-cpu-history
