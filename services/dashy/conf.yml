@@ -1,51 +1,47 @@
 pageInfo:
-  title: Home Lab
+  title: Mini Server
 sections:
-  - name: Info
+  - name: CPU
     widgets:
       - type: gl-current-cpu
         options:
           hostname: http://192.168.178.45:61208
-  - name: Some
+      - type: gl-current-cores
+        options:
+          hostname: http://192.168.178.45:61208
+      - type: gl-cpu-history
+        options:
+          hostname: http://192.168.178.45:61208
+          limit: 60
+  - name: Memory
     widgets:
-      - type: github-profile-stats
+      - type: gl-current-mem
         options:
-          username: JoaoInez
-          hideLanguagesCard: true
-          repos:
-            - joaoinez/dotfiles
-      - type: hackernews-trending
+          hostname: http://192.168.178.45:61208
+      - type: gl-mem-history
         options:
-          stories: newstories
-          limit: 10
-      # - type: github-trending-repos
-      #   options:
-      #     limit: 8
-      #     since: weekly
-  - name: Time
+          hostname: http://192.168.178.45:61208
+          limit: 80
+      - type: gl-disk-space
+        options:
+          hostname: http://192.168.178.45:61208
+  - name: Network
     widgets:
-      - type: clock
+      - type: gl-network-interfaces
         options:
-          timeZone: Europe/Amsterdam
-          format: en-GB
-          hideDate: false
-      - type: xkcd-comic
+          hostname: http://192.168.178.45:61208
+      - type: gl-network-traffic
         options:
-          comic: random
-      - type: apod
-  - name: Example Section
-    icon: far fa-rocket
+          hostname: http://192.168.178.45:61208
+          limit: 500
+  - name: External Services
     items:
       - title: GitHub
-        description: Dashy source code and docs
-        icon: fab fa-github
-        url: https://github.com/Lissy93/dashy
-      - title: Issues
-        description: View open issues, or raise a new one
-        icon: fas fa-bug
-        url: https://github.com/Lissy93/dashy/issues
+        description: Miniserver config
+        icon: favicon
+        url: https://github.com/JoaoInez/miniserver-dotfiles
   - name: Local Services
     items:
       - title: Perplexica
-        icon: fab fa-github
+        icon: favicon
         url: http://search.mini.home.arpa
