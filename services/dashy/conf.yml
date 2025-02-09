@@ -19,6 +19,15 @@ sections:
       - title: Perplexica
         icon: generative
         url: http://search.mini.home.arpa
+      - title: Open WebUI
+        icon: generative
+        url: http://chat.mini.home.arpa
+      - title: Dozzle
+        icon: generative
+        url: http://docker.mini.home.arpa
+      - title: AdGuard Home
+        icon: generative
+        url: http://192.168.178.45:8080
   - name: System
     widgets:
       - type: gl-alerts
