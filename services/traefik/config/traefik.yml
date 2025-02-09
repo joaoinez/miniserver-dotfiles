@@ -22,9 +22,6 @@ accessLog:
       names:
         User-Agent: keep
 
-# serverTransport:
-#   insecureSkipVerify: true
-
 providers:
   providersThrottleDuration: 2s
 
