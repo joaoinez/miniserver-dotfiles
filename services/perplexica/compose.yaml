@@ -6,8 +6,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./searxng:/etc/searxng:rw
-    # ports:
-    #   - 4000:8080
     networks:
       - perplexica-network
 
@@ -21,8 +19,6 @@ services:
       - SEARXNG_API_URL=http://searxng:8080
     depends_on:
       - searxng
-    # ports:
-    #   - 3001:3001
     volumes:
       - ~/container-volume/perplexica/backend-dbstore:/home/perplexica/data
       - ~/container-volume/perplexica/uploads:/home/perplexica/uploads
@@ -35,7 +31,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
-      - traefik.http.routers.perplexica-backend.rule=Host(`search-api.miniserver.home.arpa`)
+      - traefik.http.routers.perplexica-backend.rule=Host(`search-api.mini.home.arpa`)
       - traefik.http.services.perplexica-backend.loadbalancer.server.port=3001
 
   perplexica-frontend:
@@ -43,21 +39,19 @@ services:
       context: https://github.com/ItzCrazyKns/Perplexica.git
       dockerfile: app.dockerfile
       args:
-        - NEXT_PUBLIC_API_URL=http://search-api.miniserver.home.arpa/api
-        - NEXT_PUBLIC_WS_URL=ws://search-api.miniserver.home.arpa
+        - NEXT_PUBLIC_API_URL=http://search-api.mini.home.arpa/api
+        - NEXT_PUBLIC_WS_URL=ws://search-api.mini.home.arpa
     container_name: perplexica-frontend
     restart: unless-stopped
     depends_on:
       - perplexica-backend
-    # ports:
-    #   - 3000:3000
     networks:
       - perplexica-network
       - proxy
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
-      - traefik.http.routers.perplexica-frontend.rule=Host(`search.miniserver.home.arpa`)
+      - traefik.http.routers.perplexica-frontend.rule=Host(`search.mini.home.arpa`)
       - traefik.http.services.perplexica-frontend.loadbalancer.server.port=3000
 
 networks:
