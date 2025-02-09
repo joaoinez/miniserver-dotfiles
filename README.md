@@ -32,6 +32,8 @@ stow --no-folding .
 htpasswd -nbm admin <password> | pbcopy
 ```
 
+### Edit `services/perplexica/config.toml`
+
 ### Start services
 
 ```shell
