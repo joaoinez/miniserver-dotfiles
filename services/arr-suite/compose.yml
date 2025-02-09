@@ -1,0 +1,178 @@
+---
+services:
+  # image used to index torrent links from the internet
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: arrsuite-prowlarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ~/container-volume/arr-suite/configs/prowlarr:/config
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.prowlarr.rule=Host(`prowlarr.mini.home.arpa`)
+      - traefik.http.services.prowlarr.loadbalancer.server.port=9696
+
+  # image used to scan for tv shows
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: arrsuite-sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ~/container-volume/arr-suite/configs/sonarr:/config # location of database and configs
+      - ~/Media:/media # location of media library + qbittorrent download folder
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.sonarr.rule=Host(`sonarr.mini.home.arpa`)
+      - traefik.http.services.sonarr.loadbalancer.server.port=8989
+
+  # image used to scan for movies
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: arrsuite-radarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ~/container-volume/arr-suite/configs/radarr:/config # location of database and configs
+      - ~/Media:/media # location of media library + qbittorrent download folder
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.radarr.rule=Host(`radarr.mini.home.arpa`)
+      - traefik.http.services.radarr.loadbalancer.server.port=7878
+
+  # image used to scan for music
+  lidarr:
+    image: linuxserver/lidarr:latest
+    container_name: arrsuite-lidarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ~/container-volume/arr-suite/configs/lidarr:/config # location of database and configs
+      - ~/Media:/media # location of media library + qbittorrent download folder
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.lidarr.rule=Host(`lidarr.mini.home.arpa`)
+      - traefik.http.services.lidarr.loadbalancer.server.port=8686
+
+  # image used to scan for books
+  readarr:
+    image: linuxserver/readarr:develop
+    container_name: arrsuite-readarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ~/container-volume/arr-suite/configs/readarr:/config # location of database and configs
+      - ~/Media:/media # location of media library + qbittorrent download folder
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.readarr.rule=Host(`readarr.mini.home.arpa`)
+      - traefik.http.services.readarr.loadbalancer.server.port=8787
+
+  # image used to manage subtitles
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: arrsuite-bazarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ~/container-volume/arr-suite/configs/bazarr:/config # location of database and configs
+      - ~/Media:/media # location of media library + qbittorrent download folder
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.bazarr.rule=Host(`bazarr.mini.home.arpa`)
+      - traefik.http.services.bazarr.loadbalancer.server.port=6767
+
+  # image used to bypass cloudflare for prowlarr
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: arrsuite-flaresolverr
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=Europe/Amsterdam
+    expose:
+      - 8191/tcp # listening port for selenium
+
+  # image used for vpn killswitch network
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: arrsuite-gluetun
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    environment:
+      # see https://github.com/qdm12/gluetun-wiki for more details
+      # example envs based on https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY:?WIREGUARD_PRIVATE_KEY must be set}
+      - SERVER_COUNTRIES=Netherlands
+    volumes:
+      - ~/container-volume/arr-suite/configs/gluetun:/gluetun
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.qbittorrent.rule=Host(`torrent.mini.home.arpa`)
+      - traefik.http.services.qbittorrent.loadbalancer.server.port=8080
+
+  # image used to download stuff; run over gluetun network (vpn killswitch)
+  qbittorrent:
+    image: linuxserver/qbittorrent:latest
+    container_name: arrsuite-qbittorrent
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+      - WEBUI_PORT=8080
+    volumes:
+      - ~/container-volume/arr-suite/configs/qbittorrent:/config # location of database and configs
+      - ~/Media/Downloads:/media/downloads # location of media library + qbittorrent download folder
+    depends_on:
+      - gluetun
+    network_mode: container:arrsuite-gluetun # use the gluetun container network (vpn killswitch)
+
+networks:
+  proxy:
+    external: true
