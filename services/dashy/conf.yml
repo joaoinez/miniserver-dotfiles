@@ -3,6 +3,7 @@ pageInfo:
 sections:
   - name: Info
     widgets:
+      - type: system-info
   - name: Some
     widgets:
       - type: github-profile-stats
