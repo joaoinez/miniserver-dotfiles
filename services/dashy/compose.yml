@@ -1,0 +1,27 @@
+---
+services:
+  dashy:
+    image: lissy93/dashy
+    container_name: Dashy
+    restart: unless-stopped
+    volumes:
+      - ./conf.yml:/app/user-data/conf.yml
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "node", "/app/services/healthcheck"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.home.rule=Host(`home.mini.home.arpa`)
+      - traefik.http.services.home.loadbalancer.server.port=8080
+
+networks:
+  proxy:
+    external: true
