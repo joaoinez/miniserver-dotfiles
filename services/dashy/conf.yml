@@ -3,7 +3,9 @@ pageInfo:
 sections:
   - name: Info
     widgets:
-      - type: system-info
+      - type: gl-current-cpu
+        options:
+          hostname: http://192.168.178.45:61208
   - name: Some
     widgets:
       - type: github-profile-stats
