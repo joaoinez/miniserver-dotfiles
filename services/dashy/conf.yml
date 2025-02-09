@@ -27,7 +27,7 @@ sections:
         url: http://docker.mini.home.arpa
       - title: Traefik
         icon: generative
-        url: http://traefik.mini.home.arpa
+        url: http://proxy.mini.home.arpa
       - title: AdGuard Home
         icon: generative
         url: http://192.168.178.45:8080

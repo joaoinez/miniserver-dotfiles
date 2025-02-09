@@ -19,7 +19,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
-      - traefik.http.routers.home.rule=Host(`mini.home.arpa`)
+      - traefik.http.routers.home.rule=Host(`home.mini.home.arpa`)
       - traefik.http.services.home.loadbalancer.server.port=8080
 
 networks:
