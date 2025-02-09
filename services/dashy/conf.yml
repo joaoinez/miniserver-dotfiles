@@ -55,3 +55,23 @@ sections:
         options:
           hostname: http://192.168.178.45:61208
           limit: 80
+
+appConfig:
+  theme: adventure
+  glass:
+    primary: "#fff"
+    background: "#190842"
+    background-darker: "#190842"
+    font-headings: '"Roboto","Segoe UI","Ariel","sans-serif"'
+    font-body: '"Roboto","Segoe UI","Ariel","sans-serif"'
+    font-monospace: '"PTMono","Courier New",monospace'
+  glass-2:
+    primary: "#fff"
+    background: "#190842"
+    background-darker: "#190842"
+    font-headings: '"Roboto","Segoe UI","Ariel","sans-serif"'
+    font-body: '"Roboto","Segoe UI","Ariel","sans-serif"'
+    font-monospace: '"PTMono","Courier New",monospace'
+  layout: auto
+  iconSize: medium
+  defaultOpeningMethod: sametab
