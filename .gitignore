@@ -2,3 +2,4 @@
 .aider*
 .env
 services/traefik/config/usersFile.txt
+services/perplexica/config.toml
