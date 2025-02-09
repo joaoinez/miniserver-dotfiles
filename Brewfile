@@ -20,6 +20,7 @@ brew "ffmpeg"
 brew "ollama"
 brew "lazydocker"
 brew "neovim"
+brew "glances"
 
 # Casks
 cask "orbstack"
