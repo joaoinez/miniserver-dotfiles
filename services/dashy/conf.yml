@@ -1,11 +1,13 @@
 pageInfo:
   title: Home Lab
 sections:
-  - type: clock
-    options:
-      timeZone: Europe/London
-      format: en-GB
-      hideDate: false
+  - name: Time
+    widgets:
+      - type: clock
+        options:
+          timeZone: Europe/London
+          format: en-GB
+          hideDate: false
   - name: Example Section
     icon: far fa-rocket
     items:
