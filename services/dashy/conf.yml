@@ -3,6 +3,12 @@ pageInfo:
 sections:
   - name: Some
     widgets:
+      - type: github-profile-stats
+        options:
+          username: JoaoInez
+          hideLanguagesCard: true
+          repos:
+            - joaoinez/dotfiles
       - type: github-trending-repos
         options:
           limit: 8
