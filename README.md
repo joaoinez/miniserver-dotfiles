@@ -37,3 +37,15 @@ htpasswd -nbm admin <password> | pbcopy
 ```shell
 ./scripts/run-services.sh
 ```
+
+### Start `Glances`
+
+```shell
+glances -w
+```
+
+### Rebuild `bat` cache
+
+```shell
+bat cache --build
+```
