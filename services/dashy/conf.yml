@@ -11,6 +11,7 @@ sections:
       - type: xkcd-comic
         options:
           comic: random
+      - type: apod
   - name: Example Section
     icon: far fa-rocket
     items:
