@@ -9,10 +9,14 @@ sections:
           hideLanguagesCard: true
           repos:
             - joaoinez/dotfiles
-      - type: github-trending-repos
+      - type: hackernews-trending
         options:
-          limit: 8
-          since: weekly
+          stories: newstories
+          limit: 10
+      # - type: github-trending-repos
+      #   options:
+      #     limit: 8
+      #     since: weekly
   - name: Time
     widgets:
       - type: clock
