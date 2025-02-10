@@ -17,9 +17,6 @@ services:
       - traefik.http.routers.api.rule=Host(`traefik.mini.home.arpa`)
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=local-ipwhitelist@file,basic-auth@file
-      - tsdproxy.enable=true
-      - tsdproxy.name=traefik
-      - tsdproxy.container_port=8080
     networks:
       - proxy
 
