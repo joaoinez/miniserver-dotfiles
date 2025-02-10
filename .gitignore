@@ -3,3 +3,4 @@
 .env
 services/traefik/config/usersFile.txt
 services/perplexica/config.toml
+services/tsdproxy/config/tsdproxy.yaml
