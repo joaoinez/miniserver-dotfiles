@@ -4,25 +4,19 @@ services:
     image: traefik:v3.3
     container_name: traefik
     restart: unless-stopped
-    cap_add:
-      - NET_ADMIN
     ports:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      # - /var/run/vpncontrol.sock:/var/run/tailscale/tailscaled.sock:ro
       - ./config:/etc/traefik/
       - ~/container-volume/traefik/logs:/logs
     environment:
       - TZ=Europe/Amsterdam
-      # - TS_SOCKET="/@appdata/Tailscale/tailscaled.sock"
-
     labels:
       - traefik.enable=true
-      - traefik.http.routers.api.rule=Host(`miniserver.sphynx-ule.ts.net`) && Path(`/proxy`)
+      - traefik.http.routers.api.rule=Host(`proxy.mini.home.arpa`)
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=local-ipwhitelist@file,basic-auth@file
-      - traefik.http.routers.api.tls.certresolver=myresolver
     networks:
       - proxy
 
