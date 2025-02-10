@@ -113,9 +113,6 @@ alias create-8k-models="~/.local/bin/create-8k-models.sh"
 # parrot
 alias parrot="curl parrot.live"
 
-# docker
-alias docker-compose-restart="docker compose down && docker compose up -d"
-
 # █▀▀ █░█ ▄▀█ █░░
 # ██▄ ▀▄▀ █▀█ █▄▄
 eval "$(starship init zsh)"
