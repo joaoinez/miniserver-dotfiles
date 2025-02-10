@@ -8,6 +8,7 @@ services:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock:ro
       - ./config:/etc/traefik/
       - ~/container-volume/traefik/logs:/logs
     environment:

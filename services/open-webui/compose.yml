@@ -6,7 +6,6 @@ services:
     restart: unless-stopped
     volumes:
       - ~/container-volume/open-webui:/app/backend/data
-      - /run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock
     environment:
       - WEBUI_AUTH=False
     networks:
