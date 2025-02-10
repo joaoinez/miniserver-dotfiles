@@ -34,6 +34,13 @@ cp services/traefik/config/usersFile.sample.txt services/traefik/config/usersFil
 htpasswd -nbm admin <password> | pbcopy
 ```
 
+### Edit `services/tsdproxy/config/tsdproxy.yaml` to use `authKey` instead of `controlurl`
+
+```shell
+cp services/traefik/config/usersFile.sample.txt services/traefik/config/usersFile.txt
+htpasswd -nbm admin <password> | pbcopy
+```
+
 ### Edit `services/perplexica/config.toml`
 
 ```shell
