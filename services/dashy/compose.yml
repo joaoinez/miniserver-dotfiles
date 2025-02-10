@@ -21,6 +21,9 @@ services:
       - traefik.docker.network=proxy
       - traefik.http.routers.home.rule=Host(`home.mini.home.arpa`)
       - traefik.http.services.home.loadbalancer.server.port=8080
+      - tsdproxy.enable=true
+      - tsdproxy.name=home
+      - tsdproxy.container_port=8080
 
 networks:
   proxy:
