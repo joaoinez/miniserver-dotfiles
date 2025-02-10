@@ -160,23 +160,6 @@ services:
       - traefik.http.routers.qbittorrent.rule=Host(`torrent.mini.home.arpa`)
       - traefik.http.services.qbittorrent.loadbalancer.server.port=8112
 
-  # # image used to download stuff; run over gluetun network (vpn killswitch)
-  # qbittorrent:
-  #   image: linuxserver/qbittorrent:latest
-  #   container_name: arrsuite-qbittorrent
-  #   restart: unless-stopped
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Europe/Amsterdam
-  #     - WEBUI_PORT=8080
-  #   volumes:
-  #     - ~/container-volume/arr-suite/configs/qbittorrent:/config
-  #     - ~/Media/Downloads:/media/downloads # location of media library + qbittorrent download folder
-  #   depends_on:
-  #     - gluetun
-  #   network_mode: container:arrsuite-gluetun # use the gluetun container network (vpn killswitch)
-
   # image used to download stuff; run over gluetun network (vpn killswitch)
   deluge:
     image: lscr.io/linuxserver/deluge:latest

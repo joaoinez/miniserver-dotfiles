@@ -1,19 +1,32 @@
 pageInfo:
   title: Mini Server
 sections:
-  - name: Local Time
-    widgets:
-      - type: clock
-        options:
-          timeZone: Europe/Amsterdam
-          format: en-GB
-          hideDate: false
-  - name: External Services
+  - name: Media
     items:
-      - title: GitHub
-        description: Miniserver config
+      - title: Jellyfin
         icon: favicon
-        url: https://github.com/JoaoInez/miniserver-dotfiles
+        url: http://192.168.178.45:8096
+      - title: Radarr
+        icon: generative
+        url: http://radarr.mini.home.arpa
+      - title: Sonarr
+        icon: generative
+        url: http://sonarr.mini.home.arpa
+      - title: Lidarr
+        icon: generative
+        url: http://lidarr.mini.home.arpa
+      - title: Readarr
+        icon: generative
+        url: http://readarr.mini.home.arpa
+      - title: Bazarr
+        icon: generative
+        url: http://bazarr.mini.home.arpa
+      - title: Prowlarr
+        icon: generative
+        url: http://prowlarr.mini.home.arpa
+      - title: Deluge
+        icon: generative
+        url: http://torrent.mini.home.arpa
   - name: Local Services
     items:
       - title: Perplexica
@@ -34,8 +47,19 @@ sections:
       - title: Glances
         icon: generative
         url: http://192.168.178.45:61208
+  - name: External Services
+    items:
+      - title: GitHub
+        description: Miniserver config
+        icon: favicon
+        url: https://github.com/JoaoInez/miniserver-dotfiles
   - name: System
     widgets:
+      - type: clock
+        options:
+          timeZone: Europe/Amsterdam
+          format: en-GB
+          hideDate: false
       - type: gl-alerts
         options:
           hostname: http://192.168.178.45:61208
