@@ -33,7 +33,6 @@ providers:
     watch: true
     network: proxy
     exposedByDefault: false
-
-entryPoints:
-  web:
-    address: ":80"
+# entryPoints:
+#   web:
+#     address: ":80"
