@@ -29,7 +29,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - ~/container-volume/arr-suite/configs/sonarr:/config # location of database and configs
+      - ~/container-volume/arr-suite/configs/sonarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
       - proxy
@@ -49,7 +49,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - ~/container-volume/arr-suite/configs/radarr:/config # location of database and configs
+      - ~/container-volume/arr-suite/configs/radarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
       - proxy
@@ -69,7 +69,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - ~/container-volume/arr-suite/configs/lidarr:/config # location of database and configs
+      - ~/container-volume/arr-suite/configs/lidarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
       - proxy
@@ -89,7 +89,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - ~/container-volume/arr-suite/configs/readarr:/config # location of database and configs
+      - ~/container-volume/arr-suite/configs/readarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
       - proxy
@@ -109,7 +109,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - ~/container-volume/arr-suite/configs/bazarr:/config # location of database and configs
+      - ~/container-volume/arr-suite/configs/bazarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
       - proxy
@@ -158,20 +158,37 @@ services:
       - traefik.enable=true
       - traefik.docker.network=proxy
       - traefik.http.routers.qbittorrent.rule=Host(`torrent.mini.home.arpa`)
-      - traefik.http.services.qbittorrent.loadbalancer.server.port=8080
+      - traefik.http.services.qbittorrent.loadbalancer.server.port=8112
+
+  # # image used to download stuff; run over gluetun network (vpn killswitch)
+  # qbittorrent:
+  #   image: linuxserver/qbittorrent:latest
+  #   container_name: arrsuite-qbittorrent
+  #   restart: unless-stopped
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Europe/Amsterdam
+  #     - WEBUI_PORT=8080
+  #   volumes:
+  #     - ~/container-volume/arr-suite/configs/qbittorrent:/config
+  #     - ~/Media/Downloads:/media/downloads # location of media library + qbittorrent download folder
+  #   depends_on:
+  #     - gluetun
+  #   network_mode: container:arrsuite-gluetun # use the gluetun container network (vpn killswitch)
 
   # image used to download stuff; run over gluetun network (vpn killswitch)
-  qbittorrent:
-    image: linuxserver/qbittorrent:latest
-    container_name: arrsuite-qbittorrent
+  deluge:
+    image: lscr.io/linuxserver/deluge:latest
+    container_name: arrsuite-deluge
     restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Amsterdam
-      - WEBUI_PORT=8080
+      - DELUGE_LOGLEVEL=error #optional
     volumes:
-      - ~/container-volume/arr-suite/configs/qbittorrent:/config # location of database and configs
+      - ~/container-volume/arr-suite/configs/deluge/config:/config
       - ~/Media/Downloads:/media/downloads # location of media library + qbittorrent download folder
     depends_on:
       - gluetun
