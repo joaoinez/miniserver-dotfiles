@@ -16,12 +16,9 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.docker.network=proxy
+      - traefik.docker.network=traefik-proxy
       - traefik.http.routers.prowlarr.rule=Host(`prowlarr.mini.home.arpa`)
       - traefik.http.services.prowlarr.loadbalancer.server.port=9696
-      # - tsdproxy.enable=true
-      # - tsdproxy.name=prowlarr
-      # - tsdproxy.container_port=9696
 
   # image used to scan for tv shows
   sonarr:
@@ -40,12 +37,9 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.docker.network=proxy
+      - traefik.docker.network=traefik-proxy
       - traefik.http.routers.sonarr.rule=Host(`sonarr.mini.home.arpa`)
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
-      # - tsdproxy.enable=true
-      # - tsdproxy.name=sonarr
-      # - tsdproxy.container_port=8989
 
   # image used to scan for movies
   radarr:
@@ -64,12 +58,9 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.docker.network=proxy
+      - traefik.docker.network=traefik-proxy
       - traefik.http.routers.radarr.rule=Host(`radarr.mini.home.arpa`)
       - traefik.http.services.radarr.loadbalancer.server.port=7878
-      # - tsdproxy.enable=true
-      # - tsdproxy.name=radarr
-      # - tsdproxy.container_port=7878
 
   # image used to scan for music
   lidarr:
@@ -88,12 +79,9 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.docker.network=proxy
+      - traefik.docker.network=traefik-proxy
       - traefik.http.routers.lidarr.rule=Host(`lidarr.mini.home.arpa`)
       - traefik.http.services.lidarr.loadbalancer.server.port=8686
-      # - tsdproxy.enable=true
-      # - tsdproxy.name=lidarr
-      # - tsdproxy.container_port=8686
 
   # image used to scan for books
   readarr:
@@ -112,12 +100,9 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.docker.network=proxy
+      - traefik.docker.network=traefik-proxy
       - traefik.http.routers.readarr.rule=Host(`readarr.mini.home.arpa`)
       - traefik.http.services.readarr.loadbalancer.server.port=8787
-      # - tsdproxy.enable=true
-      # - tsdproxy.name=readarr
-      # - tsdproxy.container_port=8787
 
   # image used to manage subtitles
   bazarr:
@@ -136,12 +121,9 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.docker.network=proxy
+      - traefik.docker.network=traefik-proxy
       - traefik.http.routers.bazarr.rule=Host(`bazarr.mini.home.arpa`)
       - traefik.http.services.bazarr.loadbalancer.server.port=6767
-      # - tsdproxy.enable=true
-      # - tsdproxy.name=bazarr
-      # - tsdproxy.container_port=6767
 
   # image used to bypass cloudflare for prowlarr
   flaresolverr:
@@ -182,12 +164,9 @@ services:
       - traefik-proxy
     labels:
       - traefik.enable=true
-      - traefik.docker.network=proxy
+      - traefik.docker.network=traefik-proxy
       - traefik.http.routers.deluge.rule=Host(`torrent.mini.home.arpa`)
       - traefik.http.services.deluge.loadbalancer.server.port=8112
-      # - tsdproxy.enable=true
-      # - tsdproxy.name=torrent
-      # - tsdproxy.container_port=8112
 
   # image used to download stuff; run over gluetun network (vpn killswitch)
   deluge:
