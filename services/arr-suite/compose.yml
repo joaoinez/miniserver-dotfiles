@@ -12,7 +12,6 @@ services:
     volumes:
       - ~/container-volume/arr-suite/configs/prowlarr:/config
     networks:
-      - arrsuite-network
       - traefik-proxy
     labels:
       - traefik.enable=true
@@ -33,7 +32,6 @@ services:
       - ~/container-volume/arr-suite/configs/sonarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
-      - arrsuite-network
       - traefik-proxy
     labels:
       - traefik.enable=true
@@ -54,7 +52,6 @@ services:
       - ~/container-volume/arr-suite/configs/radarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
-      - arrsuite-network
       - traefik-proxy
     labels:
       - traefik.enable=true
@@ -75,7 +72,6 @@ services:
       - ~/container-volume/arr-suite/configs/lidarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
-      - arrsuite-network
       - traefik-proxy
     labels:
       - traefik.enable=true
@@ -96,7 +92,6 @@ services:
       - ~/container-volume/arr-suite/configs/readarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
-      - arrsuite-network
       - traefik-proxy
     labels:
       - traefik.enable=true
@@ -117,7 +112,6 @@ services:
       - ~/container-volume/arr-suite/configs/bazarr:/config
       - ~/Media:/media # location of media library + qbittorrent download folder
     networks:
-      - arrsuite-network
       - traefik-proxy
     labels:
       - traefik.enable=true
@@ -138,7 +132,6 @@ services:
     expose:
       - 8191/tcp # listening port for selenium
     networks:
-      - arrsuite-network
       - traefik-proxy
 
   # image used for vpn killswitch network
@@ -160,7 +153,6 @@ services:
     volumes:
       - ~/container-volume/arr-suite/configs/gluetun:/gluetun
     networks:
-      - arrsuite-network
       - traefik-proxy
     labels:
       - traefik.enable=true
@@ -186,6 +178,5 @@ services:
     network_mode: container:arrsuite-gluetun # use the gluetun container network (vpn killswitch)
 
 networks:
-  arrsuite-network:
   traefik-proxy:
     external: true
