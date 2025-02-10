@@ -4,7 +4,7 @@ sections:
   - name: Media
     items:
       - title: Jellyfin
-        icon: favicon
+        icon: generative
         url: http://192.168.178.45:8096
       - title: Radarr
         icon: generative
