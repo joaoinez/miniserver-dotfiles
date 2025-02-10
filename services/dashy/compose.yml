@@ -2,6 +2,7 @@
 services:
   dashy:
     image: lissy93/dashy
+    container_name: dashy
     restart: unless-stopped
     volumes:
       - ./conf.yml:/app/user-data/conf.yml
