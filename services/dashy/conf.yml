@@ -5,7 +5,7 @@ sections:
     items:
       - title: Jellyfin
         icon: generative
-        url: http://192.168.178.45:8096
+        url: http://100.75.221.76:8096
       - title: Radarr
         icon: generative
         url: http://radarr.mini.home.arpa
@@ -43,10 +43,10 @@ sections:
         url: http://proxy.mini.home.arpa
       - title: AdGuard Home
         icon: generative
-        url: http://192.168.178.45:8080
+        url: http://100.75.221.76:8080
       - title: Glances
         icon: generative
-        url: http://192.168.178.45:61208
+        url: http://100.75.221.76:61208
   - name: External Services
     items:
       - title: GitHub
