@@ -55,7 +55,7 @@ services:
       - traefik.http.services.perplexica-frontend.loadbalancer.server.port=3000
       - tsdproxy.enable=true
       - tsdproxy.name=search
-      - tsdproxy.container_port=8080
+      - tsdproxy.container_port=3000
 
 networks:
   perplexica-network:
