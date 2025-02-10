@@ -141,6 +141,8 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
     environment:
       # see https://github.com/qdm12/gluetun-wiki for more details
       # example envs based on https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md
