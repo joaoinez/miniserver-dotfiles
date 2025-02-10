@@ -18,8 +18,8 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
-      - traefik.http.routers.home.rule=Host(`home.mini.home.arpa`)
-      - traefik.http.services.home.loadbalancer.server.port=8080
+      - traefik.http.routers.dashy.rule=Host(`home.mini.home.arpa`)
+      - traefik.http.services.dashy.loadbalancer.server.port=8080
       # - tsdproxy.enable=true
       # - tsdproxy.name=home
       # - tsdproxy.container_port=8080
