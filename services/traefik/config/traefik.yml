@@ -40,16 +40,16 @@ entryPoints:
 
   websecure:
     address: ":443"
-    http:
-      tls:
-        certResolver: myresolver
-        domains:
-          - main: mini.sphynx-ule.ts.net
-            sans:
-              - "*.mini.sphynx-ule.ts.net"
-      middlewares:
-        - security-headers@file
-        - rate-limit@file
+    # http:
+    #   #   tls:
+    #   #     certResolver: myresolver
+    #   #     domains:
+    #   #       - main: mini.sphynx-ule.ts.net
+    #   #         sans:
+    #   #           - "*.mini.sphynx-ule.ts.net"
+    #   middlewares:
+    #     - security-headers@file
+    #     - rate-limit@file
 
 certificatesResolvers:
   myresolver:
