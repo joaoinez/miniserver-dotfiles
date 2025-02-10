@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
+      - "8082:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config:/etc/traefik/
@@ -18,8 +19,8 @@ services:
       - traefik.http.routers.api.service=api@internal
       - traefik.http.routers.api.middlewares=local-ipwhitelist@file,basic-auth@file
     networks:
-      - proxy
+      - traefik-proxy
 
 networks:
-  proxy:
+  traefik-proxy:
     external: true

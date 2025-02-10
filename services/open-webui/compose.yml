@@ -9,16 +9,16 @@ services:
     environment:
       - WEBUI_AUTH=False
     networks:
-      - proxy
+      - traefik-proxy
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
       - traefik.http.routers.openwebui.rule=Host(`chat.mini.home.arpa`)
       - traefik.http.services.openwebui.loadbalancer.server.port=8080
-      - tsdproxy.enable=true
-      - tsdproxy.name=chat
-      - tsdproxy.container_port=8080
+      # - tsdproxy.enable=true
+      # - tsdproxy.name=chat
+      # - tsdproxy.container_port=8080
 
 networks:
-  proxy:
+  traefik-proxy:
     external: true

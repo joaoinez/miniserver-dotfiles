@@ -1,18 +1,18 @@
 services:
   tsdproxy:
     image: almeidapaulopt/tsdproxy:latest
+    restart: unless-stopped
+    ports:
+      - "8083:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - datadir:/data
       - ./config/:/config
-    restart: unless-stopped
-    ports:
-      - "8081:8080"
     networks:
-      - proxy
+      - tsdproxy-proxy
 
 networks:
-  proxy:
+  tsdproxy-proxy:
     external: true
 
 volumes:

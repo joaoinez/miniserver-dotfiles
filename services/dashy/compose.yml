@@ -2,7 +2,6 @@
 services:
   dashy:
     image: lissy93/dashy
-    container_name: Dashy
     restart: unless-stopped
     volumes:
       - ./conf.yml:/app/user-data/conf.yml
@@ -15,16 +14,16 @@ services:
       retries: 3
       start_period: 40s
     networks:
-      - proxy
+      - traefik-proxy
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
       - traefik.http.routers.home.rule=Host(`home.mini.home.arpa`)
       - traefik.http.services.home.loadbalancer.server.port=8080
-      - tsdproxy.enable=true
-      - tsdproxy.name=home
-      - tsdproxy.container_port=8080
+      # - tsdproxy.enable=true
+      # - tsdproxy.name=home
+      # - tsdproxy.container_port=8080
 
 networks:
-  proxy:
+  traefik-proxy:
     external: true

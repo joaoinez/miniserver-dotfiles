@@ -27,7 +27,7 @@ services:
       - "host.docker.internal:host-gateway"
     networks:
       - perplexica-network
-      - proxy
+      - traefik-proxy
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
@@ -47,17 +47,14 @@ services:
       - perplexica-backend
     networks:
       - perplexica-network
-      - proxy
+      - traefik-proxy
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
       - traefik.http.routers.perplexica-frontend.rule=Host(`search.mini.home.arpa`)
       - traefik.http.services.perplexica-frontend.loadbalancer.server.port=3000
-      - tsdproxy.enable=true
-      - tsdproxy.name=search
-      - tsdproxy.container_port=3000
 
 networks:
   perplexica-network:
-  proxy:
+  traefik-proxy:
     external: true

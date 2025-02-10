@@ -7,15 +7,15 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
-      - proxy
+      - traefik-proxy
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
       - traefik.http.routers.dozzle.rule=Host(`dozzle.mini.home.arpa`)
       - traefik.http.services.dozzle.loadbalancer.server.port=8080
-      - tsdproxy.enable=true
-      - tsdproxy.container_port=8080
+      # - tsdproxy.enable=true
+      # - tsdproxy.container_port=8080
 
 networks:
-  proxy:
+  traefik-proxy:
     external: true
