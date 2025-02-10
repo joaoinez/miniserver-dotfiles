@@ -131,6 +131,8 @@ services:
       - TZ=Europe/Amsterdam
     expose:
       - 8191/tcp # listening port for selenium
+    networks:
+      - proxy
 
   # image used for vpn killswitch network
   gluetun:
