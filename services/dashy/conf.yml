@@ -34,16 +34,19 @@ sections:
         url: http://search.mini.home.arpa
       - title: Open WebUI
         icon: generative
-        url: http://chat.mini.home.arpa
+        url: http://chat.sphynx-ule.ts.net
       - title: Dozzle
         icon: generative
         url: http://docker.mini.home.arpa
-      - title: Traefik
-        icon: generative
-        url: http://proxy.mini.home.arpa
       - title: AdGuard Home
         icon: generative
-        url: http://100.75.221.76:8080
+        url: http://100.75.221.76:8081
+      - title: Traefik
+        icon: generative
+        url: http://100.75.221.76:8082
+      - title: Tailscale Proxy
+        icon: generative
+        url: http://100.75.221.76:8083
       - title: Glances
         icon: generative
         url: http://100.75.221.76:61208
