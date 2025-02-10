@@ -8,11 +8,13 @@ services:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock:rw
+      - /@appdata/Tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock:rw
       - ./config:/etc/traefik/
       - ~/container-volume/traefik/logs:/logs
     environment:
       - TZ=Europe/Amsterdam
+      # - TS_SOCKET="/@appdata/Tailscale/tailscaled.sock"
+
     labels:
       - traefik.enable=true
       - traefik.http.routers.api.rule=Host(`miniserver.sphynx-ule.ts.net`) && Path(`/proxy`)
