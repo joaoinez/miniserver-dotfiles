@@ -1,6 +1,7 @@
 services:
   tsdproxy:
     image: almeidapaulopt/tsdproxy:latest
+    container_name: tsdproxy
     restart: unless-stopped
     ports:
       - "8083:8080"
