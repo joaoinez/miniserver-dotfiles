@@ -157,8 +157,8 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
-      - traefik.http.routers.qbittorrent.rule=Host(`torrent.mini.home.arpa`)
-      - traefik.http.services.qbittorrent.loadbalancer.server.port=8112
+      - traefik.http.routers.deluge.rule=Host(`torrent.mini.home.arpa`)
+      - traefik.http.services.deluge.loadbalancer.server.port=8112
 
   # image used to download stuff; run over gluetun network (vpn killswitch)
   deluge:
