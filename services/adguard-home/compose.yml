@@ -9,7 +9,13 @@ services:
       - 53:53/tcp
       - 53:53/udp
       - 3000:3000/tcp
-      - 8082:80/tcp
+      - 8080:80
     volumes:
       - ~/container-volume/adguard-home/work:/opt/adguardhome/work
       - ~/container-volume/adguard-home/conf:/opt/adguardhome/conf
+    labels:
+      - tsdproxy.enable=false
+
+networks:
+  proxy:
+    external: true
