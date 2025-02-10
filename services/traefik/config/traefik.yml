@@ -33,3 +33,24 @@ providers:
     watch: true
     network: proxy
     exposedByDefault: false
+
+entryPoints:
+  web:
+    address: ":80"
+
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: myresolver
+        domains:
+          - main: mini.sphynx-ule.ts.net
+            sans:
+              - "*.mini.sphynx-ule.ts.net"
+      middlewares:
+        - security-headers@file
+        - rate-limit@file
+
+certificatesResolvers:
+  myresolver:
+    tailscale: {}
