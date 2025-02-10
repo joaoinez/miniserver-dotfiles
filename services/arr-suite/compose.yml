@@ -174,8 +174,6 @@ services:
     depends_on:
       - gluetun
     network_mode: container:arrsuite-gluetun # use the gluetun container network (vpn killswitch)
-    networks:
-      - proxy
 
 networks:
   proxy:
