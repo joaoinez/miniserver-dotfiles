@@ -13,12 +13,3 @@ services:
     volumes:
       - ~/container-volume/adguard-home/work:/opt/adguardhome/work
       - ~/container-volume/adguard-home/conf:/opt/adguardhome/conf
-    networks:
-      - proxy
-    labels:
-      - tsdproxy.enable=true
-      - tsdproxy.name=dns
-
-networks:
-  proxy:
-    external: true
