@@ -10,8 +10,7 @@ for service_dir in "$SERVICES_DIR"/*; do
   if [ -d "$service_dir" ]; then
     echo "Starting service in: $(basename "$service_dir")"
     cd "$service_dir" || exit
-    docker compose down
-    docker compose up -d
+    docker compose restart
   fi
 done
 
