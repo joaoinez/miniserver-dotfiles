@@ -53,6 +53,9 @@ services:
       - traefik.docker.network=proxy
       - traefik.http.routers.perplexica-frontend.rule=Host(`search.mini.home.arpa`)
       - traefik.http.services.perplexica-frontend.loadbalancer.server.port=3000
+      - tsdproxy.enable=true
+      - tsdproxy.name=search
+      - tsdproxy.container_port=8080
 
 networks:
   perplexica-network:

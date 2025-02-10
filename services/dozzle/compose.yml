@@ -11,8 +11,11 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
-      - traefik.http.routers.dozzle.rule=Host(`docker.mini.home.arpa`)
+      - traefik.http.routers.dozzle.rule=Host(`dozzle.mini.home.arpa`)
       - traefik.http.services.dozzle.loadbalancer.server.port=8080
+      - tsdproxy.enable=true
+      - tsdproxy.name=dozzle
+      - tsdproxy.container_port=8080
 
 networks:
   proxy:

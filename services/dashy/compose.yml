@@ -24,7 +24,6 @@ services:
       - tsdproxy.enable=true
       - tsdproxy.name=home
       - tsdproxy.container_port=8080
-      - tsdproxy.ephemeral=false
 
 networks:
   proxy:
