@@ -15,15 +15,18 @@ services:
       start_period: 40s
     networks:
       - traefik-proxy
+      - tailscale-proxy
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik-proxy
       - traefik.http.routers.dashy.rule=Host(`home.mini.home.arpa`)
       - traefik.http.services.dashy.loadbalancer.server.port=8080
-      # - tsdproxy.enable=true
-      # - tsdproxy.name=home
-      # - tsdproxy.container_port=8080
+      - tsdproxy.enable=true
+      - tsdproxy.name=home
+      - tsdproxy.container_port=8080
 
 networks:
   traefik-proxy:
+    external: true
+  tailscale-proxy:
     external: true
