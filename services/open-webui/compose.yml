@@ -13,7 +13,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
-      - traefik.http.routers.openwebui.rule=Host(`mini.sphynx-ule.ts.net`) && Path(`/chat`)
+      - traefik.http.routers.openwebui.rule=Host(`miniserver.sphynx-ule.ts.net`) && Path(`/chat`)
       - traefik.http.routers.openwebui.tls.certresolver=myresolver
       - traefik.http.services.openwebui.loadbalancer.server.port=8080
 
