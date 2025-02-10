@@ -28,6 +28,7 @@ cask "stats"
 cask "lm-studio"
 cask "google-drive"
 cask "jellyfin"
+cask "tailscale"
 
 # Store
 mas "Amphetamine", id: 937984704

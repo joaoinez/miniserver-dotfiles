@@ -57,3 +57,9 @@ glances -w
 ```shell
 bat cache --build
 ```
+
+## Resources
+
+* <https://wiki.bazarr.media/>
+* <https://github.com/Haxxnet/Compose-Examples>
+* <https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md>
