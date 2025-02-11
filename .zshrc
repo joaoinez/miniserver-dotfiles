@@ -14,6 +14,7 @@ export EDITOR="nvim"
 export BAT_THEME="Catppuccin Mocha"
 export MANPAGER="nvim +Man!"
 export TERM="xterm"
+export HOMEBREW_NO_ANALYTICS=1
 
 # ▀█ █ █▄░█ █ ▀█▀
 # █▄ █ █░▀█ █ ░█░
