@@ -14,7 +14,7 @@ style = "blue"
 disabled = false
 
 [os.symbols]
-Macos = ""
+Macos = "󰀶"
 
 [directory]
 format = "[ $path ]($style)"
