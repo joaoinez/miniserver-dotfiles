@@ -38,7 +38,7 @@ style = 'bold green'
 
 [localip]
 ssh_only = false
-format = ' @ [$localipv4](bold teal) '
+format = '@ [$localipv4](bold teal)'
 disabled = false
 
 [directory]
