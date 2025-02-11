@@ -18,6 +18,11 @@ disabled = false
 [os.symbols]
 Macos = "󰀶"
 
+[localip]
+ssh_only = false
+format = '@[$localipv4](bold red) '
+disabled = false
+
 [directory]
 format = "[ $path ]($style)"
 style = "mauve"
