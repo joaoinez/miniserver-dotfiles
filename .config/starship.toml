@@ -1,5 +1,6 @@
 format = """
 $os\
+$memory_usage\
 $localip\
 $directory\
 $git_branch\
@@ -17,6 +18,12 @@ disabled = false
 
 [os.symbols]
 Macos = "󰀶"
+
+[memory_usage]
+disabled = false
+threshold = -1
+symbol = ' '
+style = 'bold dimmed green'
 
 [localip]
 ssh_only = false
