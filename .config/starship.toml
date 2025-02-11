@@ -20,7 +20,7 @@ disabled = false
 Macos = "󰀶"
 
 [memory_usage]
-format = ' via $symbol [${ram}( | ${swap})]($style) '
+format = ' using [$symbol]($style) [${ram}( | ${swap})]($style) '
 disabled = false
 threshold = -1
 symbol = ''
