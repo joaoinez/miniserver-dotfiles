@@ -7,11 +7,10 @@ $git_branch\
 $git_status\
 $git_state\
 $docker_context\
+$fill\
+$time\
 \n$character"""
 
-right_format = """
-$time
-"""
 
 add_newline = false
 palette = "catppuccin_mocha"
@@ -68,7 +67,11 @@ success_symbol = '[_](bold green)'
 error_symbol = '[_](bold red)'
 
 [time]
+format = '[$time]($style) '
 disabled = false
+
+[fill]
+symbol = ''
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
