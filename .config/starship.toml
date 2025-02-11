@@ -20,7 +20,7 @@ Macos = "󰀶"
 
 [localip]
 ssh_only = false
-format = '@[$localipv4](bold red) '
+format = ' @ [$localipv4](bold teal) '
 disabled = false
 
 [directory]
