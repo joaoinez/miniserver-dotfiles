@@ -5,8 +5,13 @@ $localip\
 $directory\
 $git_branch\
 $git_status\
+$git_state\
 $docker_context\
 \n$character"""
+
+right_format = """
+$time
+"""
 
 add_newline = false
 palette = "catppuccin_mocha"
@@ -41,7 +46,7 @@ format = "[ $branch ]($style)"
 style = "peach"
 
 [git_status]
-format = "$ahead_behind$conflicted$staged$deleted$renamed$modified$typechanged$untracked"
+format = "$ahead_behind$stashed$conflicted$staged$deleted$renamed$modified$typechanged$untracked"
 up_to_date = "[ ](text)"
 ahead = "[ ](sapphire)"
 behind = "[ ](lavender)"
@@ -50,9 +55,10 @@ conflicted = "[ ](red)"
 staged = "[ ](green)"
 deleted = "[ ](yellow)"
 renamed = "[ ](yellow)"
-modified = "[ ](yellow)"
+modified = "[≡ ](yellow)"
 typechanged = "[ ](yellow)"
 untracked = "[ ](yellow)"
+stashed = "[󰜦 ](rosewater)"
 
 [docker_context]
 detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile', 'compose.yml', 'compose.yaml']
