@@ -1,5 +1,6 @@
 format = """
 $os\
+$localip\
 $directory\
 $git_branch\
 $git_status\
