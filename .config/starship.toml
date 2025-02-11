@@ -24,6 +24,11 @@ disabled = false
 [os.symbols]
 Macos = "󰀶"
 
+[username]
+style_user = 'rosewater bold'
+style_root = 'red bold'
+format = ' [$user]($style)'
+
 [memory_usage]
 format = ' using [$symbol]($style) [${ram}( | ${swap})]($style) '
 disabled = false
@@ -58,7 +63,7 @@ renamed = "[ ](yellow)"
 modified = "[≡ ](yellow)"
 typechanged = "[ ](yellow)"
 untracked = "[ ](yellow)"
-stashed = "[󰜦 ](rosewater)"
+stashed = "[󰜦 ](flamingo)"
 
 [docker_context]
 detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile', 'compose.yml', 'compose.yaml']
