@@ -42,7 +42,7 @@ format = ' @ [$localipv4](bold teal) '
 disabled = false
 
 [directory]
-format = "[ $path ]($style)"
+format = " in [$path]($style)"
 style = "mauve"
 truncation_length = 1
 
