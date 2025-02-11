@@ -21,6 +21,7 @@ brew "ollama"
 brew "lazydocker"
 brew "neovim"
 brew "glances"
+brew "yazi"
 
 # Casks
 cask "orbstack"
