@@ -12,7 +12,7 @@ add_newline = false
 palette = "catppuccin_mocha"
 
 [os]
-format = "[$symbol]($style)"
+format = " [$symbol]($style)"
 style = "blue"
 disabled = false
 
@@ -20,10 +20,11 @@ disabled = false
 Macos = "󰀶"
 
 [memory_usage]
+format = ' via $symbol [${ram}( | ${swap})]($style) '
 disabled = false
 threshold = -1
-symbol = ' '
-style = 'bold dimmed green'
+symbol = ''
+style = 'bold green'
 
 [localip]
 ssh_only = false
@@ -55,6 +56,10 @@ untracked = "[ ](yellow)"
 
 [docker_context]
 detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile', 'compose.yml', 'compose.yaml']
+
+[character]
+success_symbol = '[_](bold green)'
+error_symbol = '[_](bold red)'
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
