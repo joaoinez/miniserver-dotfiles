@@ -67,6 +67,9 @@ detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile', 'comp
 success_symbol = '[_](bold green)'
 error_symbol = '[_](bold red)'
 
+[time]
+disabled = false
+
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"
