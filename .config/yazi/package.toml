@@ -1,14 +1,14 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:max-preview"
-rev = "a53d544"
-hash = "2bcf0c353c61b92662b372a69ff97057"
+rev = "8945e54"
+hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "a53d544"
-hash = "20dc1361fc474934c6bf321110eb8e12"
+rev = "8945e54"
+hash = "aef2b1a805b80cce573bb766f1459d88"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "c686812"
-hash = "dc7a1610014caab818e1e43f0c860773"
+rev = "302c0d5"
+hash = "c40e434318a8ceffd01842f8dfb2390e"
