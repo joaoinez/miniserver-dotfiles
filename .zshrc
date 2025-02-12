@@ -160,4 +160,5 @@ _fzf_comprun() {
   esac
 }
 
-source ~/.local/bin
+source ~/.local/bin/fzf-git.sh
+source ~/.local/bin/restart-arrsuite.sh
