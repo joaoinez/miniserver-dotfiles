@@ -114,6 +114,9 @@ alias create-8k-models="~/.local/bin/create-8k-models.sh"
 # parrot
 alias parrot="curl parrot.live"
 
+# restart arr suite containers
+alias restart-arrsuite="~/.local/bin/restart-arrsuite.sh"
+
 # █▀▀ █░█ ▄▀█ █░░
 # ██▄ ▀▄▀ █▀█ █▄▄
 eval "$(starship init zsh)"
@@ -161,4 +164,3 @@ _fzf_comprun() {
 }
 
 source ~/.local/bin/fzf-git.sh
-source ~/.local/bin/restart-arrsuite.sh
