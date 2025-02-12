@@ -160,5 +160,4 @@ _fzf_comprun() {
   esac
 }
 
-source ~/.local/bin/fzf-git.sh
-
+source ~/.local/bin
