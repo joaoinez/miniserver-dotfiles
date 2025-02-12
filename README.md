@@ -65,6 +65,16 @@ glances -w
 bat cache --build
 ```
 
+### Create a cron job to restart arr suite containers everyday at midnight
+
+```shell
+crontab -e
+```
+
+```crontab
+0 0 * * * /Users/miniserver/.local/bin/restart-arrsuite.sh
+```
+
 ## Resources
 
 * <https://wiki.bazarr.media/>
