@@ -1,5 +1,14 @@
-[plugin]
-deps = [{ use = "yazi-rs/plugins:max-preview", rev = "a53d544" }, { use = "yazi-rs/plugins:smart-enter", rev = "a53d544" }]
+[[plugin.deps]]
+use = "yazi-rs/plugins:max-preview"
+rev = "a53d544"
+hash = "2bcf0c353c61b92662b372a69ff97057"
 
-[flavor]
-deps = [{ use = "yazi-rs/flavors:catppuccin-mocha", rev = "c686812" }]
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "a53d544"
+hash = "20dc1361fc474934c6bf321110eb8e12"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "c686812"
+hash = "dc7a1610014caab818e1e43f0c860773"

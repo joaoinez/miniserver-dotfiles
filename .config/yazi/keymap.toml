@@ -35,8 +35,8 @@ desc = "Empty the trash"
 
 [[manager.prepend_keymap]]
 on  = "k"
-run = "plugin arrow --args=-1"
+run = "plugin arrow -1"
 
 [[manager.prepend_keymap]]
 on  = "j"
-run = "plugin arrow --args=1"
+run = "plugin arrow 1"
