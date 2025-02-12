@@ -26,3 +26,4 @@ services
 ^/LICENSE.*
 ^/COPYING
 ^/Brewfile
+\.DS_Store
