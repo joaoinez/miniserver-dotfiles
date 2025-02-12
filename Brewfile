@@ -29,7 +29,6 @@ cask "stats"
 cask "lm-studio"
 cask "google-drive"
 cask "jellyfin"
-cask "plex-media-server"
 cask "tailscale"
 
 # Store
