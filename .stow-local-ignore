@@ -18,6 +18,7 @@ _darcs
 models
 scripts
 services
+assets
 
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
