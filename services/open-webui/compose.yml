@@ -6,8 +6,6 @@ services:
     restart: unless-stopped
     volumes:
       - ~/container-volume/open-webui:/app/backend/data
-    environment:
-      - WEBUI_AUTH=False
     networks:
       - traefik-proxy
       - tailscale-proxy
