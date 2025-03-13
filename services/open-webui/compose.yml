@@ -17,6 +17,8 @@ services:
       - tsdproxy.enable=true
       - tsdproxy.name=chat
       - tsdproxy.container_port=8080
+    environment:
+      - ENABLE_ADMIN_CHAT_ACCESS=false
 
 networks:
   traefik-proxy:
