@@ -9,58 +9,42 @@ services:
     networks:
       - perplexica-network
 
-  perplexica-backend:
+  app:
+    image: itzcrazykns1337/perplexica:main
     build:
       context: https://github.com/ItzCrazyKns/Perplexica.git
-      dockerfile: backend.dockerfile
-    container_name: perplexica-backend
+      dockerfile: app.dockerfile
+      # args:
+      #   - NEXT_PUBLIC_API_URL=http://search-api.mini.home.arpa/api
+      #   - NEXT_PUBLIC_WS_URL=ws://search-api.mini.home.arpa
+    container_name: perplexica-app
     restart: unless-stopped
     environment:
       - SEARXNG_API_URL=http://searxng:8080
-    depends_on:
-      - searxng
     volumes:
       - ~/container-volume/perplexica/backend-dbstore:/home/perplexica/data
       - ~/container-volume/perplexica/uploads:/home/perplexica/uploads
       - ./config.toml:/home/perplexica/config.toml
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - perplexica-network
-      - traefik-proxy
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=traefik-proxy
-      - traefik.http.routers.perplexica-backend.rule=Host(`search-api.mini.home.arpa`)
-      - traefik.http.services.perplexica-backend.loadbalancer.server.port=3001
-
-  perplexica-frontend:
-    build:
-      context: https://github.com/ItzCrazyKns/Perplexica.git
-      dockerfile: app.dockerfile
-      args:
-        - NEXT_PUBLIC_API_URL=http://search-api.mini.home.arpa/api
-        - NEXT_PUBLIC_WS_URL=ws://search-api.mini.home.arpa
-    container_name: perplexica-frontend
-    restart: unless-stopped
-    depends_on:
-      - perplexica-backend
-    networks:
-      - perplexica-network
-      - traefik-proxy
+      # - traefik-proxy
       - tailscale-proxy
     labels:
-      - traefik.enable=true
-      - traefik.docker.network=traefik-proxy
-      - traefik.http.routers.perplexica-frontend.rule=Host(`search.mini.home.arpa`)
-      - traefik.http.services.perplexica-frontend.loadbalancer.server.port=3000
+      # - traefik.enable=true
+      # - traefik.docker.network=traefik-proxy
+      # - traefik.http.routers.perplexica-frontend.rule=Host(`search.mini.home.arpa`)
+      # - traefik.http.services.perplexica-frontend.loadbalancer.server.port=3000
       - tsdproxy.enable=true
       - tsdproxy.name=search
       - tsdproxy.container_port=3000
 
+volumes:
+  backend-dbstore:
+  uploads:
+
 networks:
   perplexica-network:
-  traefik-proxy:
-    external: true
+  # traefik-proxy:
+  #   external: true
   tailscale-proxy:
     external: true
