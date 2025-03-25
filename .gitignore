@@ -3,4 +3,5 @@
 .env
 services/traefik/config/usersFile.txt
 services/perplexica/config.toml
+services/perplexica/searxng/*.new
 services/tsdproxy/config/tsdproxy.yaml
