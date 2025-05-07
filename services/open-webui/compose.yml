@@ -27,6 +27,8 @@ services:
       dockerfile: Dockerfile
     container_name: mcpo
     restart: unless-stopped
+    volumes: 
+      - ./config.json:/app/config.json:ro 
     networks:
       - openwebui-network
     env_file:

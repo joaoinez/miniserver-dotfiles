@@ -1,4 +1,4 @@
 FROM python:3.11-slim
 WORKDIR /app
 RUN pip install mcpo uv
-CMD uvx mcpo --host 0.0.0.0 --port 8000 --api-key ${MCPO_API_KEY}
+CMD ["uvx", "mcpo", "--host", "0.0.0.0", "--port", "8000", "--api-key", "${MCPO_API_KEY}", "--config", "/app/config.yaml"]
