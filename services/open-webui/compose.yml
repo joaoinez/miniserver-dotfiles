@@ -9,6 +9,7 @@ services:
     networks:
       - traefik-proxy
       - tailscale-proxy
+      - openwebui-network
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik-proxy
@@ -20,8 +21,20 @@ services:
     environment:
       - ENABLE_ADMIN_CHAT_ACCESS=false
 
+  mcpo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcpo
+    restart: unless-stopped
+    networks:
+      - openwebui-network
+    env_file:
+      - .env
+
 networks:
   traefik-proxy:
     external: true
   tailscale-proxy:
     external: true
+  openwebui-network:
