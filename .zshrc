@@ -164,3 +164,6 @@ _fzf_comprun() {
 }
 
 source ~/.local/bin/fzf-git.sh
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/miniserver/.lmstudio/bin"
