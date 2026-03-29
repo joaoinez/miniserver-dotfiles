@@ -1,42 +1,32 @@
 ---
 services:
+  tailscale-open-webui:
+    image: tailscale/tailscale:latest
+    container_name: ts-open-webui
+    hostname: open-webui
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
-    container_name: openwebui
+    container_name: open-webui
     restart: unless-stopped
+    network_mode: service:tailscale-open-webui
     volumes:
-      - ~/container-volume/open-webui:/app/backend/data
-    networks:
-      - traefik-proxy
-      - tailscale-proxy
-      - openwebui-network
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=traefik-proxy
-      - traefik.http.routers.openwebui.rule=Host(`chat.mini.home.arpa`)
-      - traefik.http.services.openwebui.loadbalancer.server.port=8080
-      - tsdproxy.enable=true
-      - tsdproxy.name=chat
-      - tsdproxy.container_port=8080
+      - open-webui:/app/backend/data
     environment:
       - ENABLE_ADMIN_CHAT_ACCESS=false
+    depends_on:
+      - tailscale-open-webui
 
-  mcpo:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: mcpo
-    restart: unless-stopped
-    volumes: 
-      - ./config.json:/app/config.json:ro 
-    networks:
-      - openwebui-network
-    env_file:
-      - .env
-
-networks:
-  traefik-proxy:
-    external: true
-  tailscale-proxy:
-    external: true
-  openwebui-network:
+volumes:
+  open-webui:
+  tailscale-state:

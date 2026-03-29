@@ -1,2 +1,0 @@
-FROM command-r7b:latest
-PARAMETER num_ctx 8192
