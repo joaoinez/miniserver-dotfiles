@@ -20,6 +20,3 @@ cask "orbstack"
 cask "stats"
 cask "jellyfin"
 cask "tailscale"
-
-# Store
-mas "Amphetamine", id: 937984704
