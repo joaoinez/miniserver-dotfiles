@@ -1,3 +1,4 @@
+export TERM="xterm-256color"
 export MYSCRIPTS="$HOME/.local/bin"
 export MYVIMRC="$HOME/.config/nvim/init.lua"
 export EDITOR="nvim"
