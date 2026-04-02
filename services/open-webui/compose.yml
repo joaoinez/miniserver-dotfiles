@@ -15,7 +15,7 @@ services:
   tailscale-open-webui:
     image: tailscale/tailscale:latest
     container_name: ts-open-webui
-    hostname: chat
+    hostname: open-webui
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
       - TS_STATE_DIR=/var/lib/tailscale
