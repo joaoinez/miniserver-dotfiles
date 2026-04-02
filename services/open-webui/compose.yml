@@ -1,20 +1,5 @@
 ---
 services:
-  tailscale-open-webui:
-    image: tailscale/tailscale:latest
-    container_name: ts-open-webui
-    hostname: open-webui
-    environment:
-      - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
-      - TS_STATE_DIR=/var/lib/tailscale
-      - TS_USERSPACE=false
-    volumes:
-      - tailscale-state:/var/lib/tailscale
-      - /dev/net/tun:/dev/net/tun
-    cap_add:
-      - NET_ADMIN
-    restart: unless-stopped
-
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
@@ -26,6 +11,23 @@ services:
       - ENABLE_ADMIN_CHAT_ACCESS=false
     depends_on:
       - tailscale-open-webui
+
+  tailscale-open-webui:
+    image: tailscale/tailscale:latest
+    container_name: ts-open-webui
+    hostname: chat
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_SERVE_CONFIG=/config/ts-serve-config.json
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+      - ./:/config:ro
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
 
 volumes:
   open-webui:

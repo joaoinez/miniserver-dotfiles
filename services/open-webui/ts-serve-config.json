@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "services": [
+    {
+      "ports": [
+        {
+          "port": 80,
+          "proto": "http"
+        }
+      ],
+      "backend": "http://127.0.0.1:8080"
+    }
+  ]
+}
