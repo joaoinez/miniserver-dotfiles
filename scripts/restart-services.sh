@@ -11,7 +11,7 @@ for service_dir in "$SERVICES_DIR"/*; do
     echo "Starting service in: $(basename "$service_dir")"
     cd "$service_dir" || exit
     docker compose pull
-    docker compose restart
+    docker compose up -d --force-recreate
   fi
 done
 
