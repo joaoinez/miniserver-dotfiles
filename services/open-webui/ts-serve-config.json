@@ -1,9 +1,15 @@
 {
-  "version": 1,
-  "services": {
-    "svc:open-webui": {
-      "endpoints": {
-        "tcp:80": "http://127.0.0.1:8080"
+  "TCP": {
+    "443": {
+      "HTTPS": true
+    }
+  },
+  "Web": {
+    "chat.sphynx-ule.ts.net:443": {
+      "Handlers": {
+        "/": {
+          "Proxy": "http://127.0.0.1:8080"
+        }
       }
     }
   }
