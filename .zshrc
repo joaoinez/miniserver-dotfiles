@@ -30,6 +30,7 @@ alias ll="ls -la"
 alias vim="nvim"
 alias source-zsh="source ~/.zshrc && source ~/.zshenv && source ~/.zprofile"
 alias gfp="git fetch && git pull"
+alias launchctls="launchctl list | grep -v com.user"
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

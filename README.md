@@ -59,6 +59,10 @@ stow --restow --adopt .
 ### Load `launchd` agents
 
 ```shell
+launchctl load ~/Library/LaunchAgents/com.user.renew-tailscale-certs.plist
+```
+
+```shell
 launchctl load ~/Library/LaunchAgents/com.user.serve-chat-llm.plist
 ```
 
@@ -69,6 +73,16 @@ launchctl load ~/Library/LaunchAgents/com.user.serve-small-llm.plist
 ```shell
 launchctl load ~/Library/LaunchAgents/com.user.start-glances.plist
 ```
+
+### Renew Tailscale certs
+
+Run this once before starting services that use the certs.
+
+```shell
+./scripts/renew-tailscale-certs.sh
+```
+
+The certs are stored in `~/.local/share/certs/`.
 
 ## Resources
 
