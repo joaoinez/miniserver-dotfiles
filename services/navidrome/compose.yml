@@ -5,13 +5,9 @@ services:
     container_name: navidrome
     restart: unless-stopped
     network_mode: service:tailscale-navidrome
-    environment:
-      ND_TLSCERT: "/certs/miniserver.sphynx-ule.ts.net.crt"
-      ND_TLSKEY: "/certs/miniserver.sphynx-ule.ts.net.key"
     volumes:
       - "navidrome:/data"
       - "/Users/miniserver/Music:/music:ro"
-      - "/Users/miniserver/.local/share/certs:/certs:ro"
 
   tailscale-navidrome:
     image: tailscale/tailscale:latest
