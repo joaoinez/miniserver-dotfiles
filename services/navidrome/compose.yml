@@ -3,7 +3,6 @@ services:
   navidrome:
     image: deluan/navidrome:latest
     container_name: navidrome
-    user: 501:20
     restart: unless-stopped
     network_mode: service:tailscale-navidrome
     environment:
