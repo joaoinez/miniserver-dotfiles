@@ -2,6 +2,8 @@
 pageInfo:
   title: Mini Server
 appConfig:
+  preventWriteToDisk: true
+  preventLocalSave: true
   disableConfiguration: true
 sections:
   - name: System
@@ -39,3 +41,27 @@ sections:
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
           limit: 80
+  - name: Monitoring
+    items:
+      - title: Glances
+        icon: generative
+        url: https://miniserver.sphynx-ule.ts.net:61208
+      - title: Dozzle
+        icon: generative
+        url: https://dozzle.sphynx-ule.ts.net
+  - name: Apps
+    items:
+      - title: Open WebUI
+        icon: generative
+        url: https://chat.sphynx-ule.ts.net
+      - title: WakaTime
+        icon: generative
+        url: https://wakapi.sphynx-ule.ts.net
+  - name: Admin
+    items:
+      - title: Jellyfin
+        icon: generative
+        url: https://miniserver.sphynx-ule.ts.net:8920
+      - title: Navidrome
+        icon: generative
+        url: https://navidrome.sphynx-ule.ts.net
