@@ -13,4 +13,29 @@ sections:
           hideDate: false
       - type: gl-current-cpu
         options:
-          hostname: http://100.92.88.19:61208
+          hostname: http://host.docker.internal:61208
+      - type: gl-alerts
+        options:
+          hostname: http://host.docker.internal:61208
+      - type: gl-network-traffic
+        options:
+          hostname: http://host.docker.internal:61208
+          limit: 500
+  - name: CPU
+    widgets:
+      - type: gl-current-cpu
+        options:
+          hostname: http://host.docker.internal:61208
+      - type: gl-cpu-history
+        options:
+          hostname: http://host.docker.internal:61208
+          limit: 60
+  - name: Memory
+    widgets:
+      - type: gl-current-mem
+        options:
+          hostname: http://host.docker.internal:61208
+      - type: gl-mem-history
+        options:
+          hostname: http://host.docker.internal:61208
+          limit: 80
