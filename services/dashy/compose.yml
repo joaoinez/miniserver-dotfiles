@@ -1,0 +1,38 @@
+---
+services:
+  dashy:
+    image: lissy93/dashy
+    container_name: dashy
+    volumes:
+      - ./conf.yml:/app/user-data/conf.yml
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "/app/services/healthcheck"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  tailscale-dashy:
+    image: tailscale/tailscale:latest
+    container_name: ts-dashy
+    hostname: dashy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_SERVE_CONFIG=/config/ts-serve-config.json
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+      - ./:/config:ro
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+volumes:
+  tailscale-state:
