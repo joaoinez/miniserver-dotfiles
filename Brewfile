@@ -14,6 +14,7 @@ brew "lazydocker"
 brew "neovim"
 brew "glances"
 brew "yazi"
+brew "llama.cpp"
 
 # Casks
 cask "orbstack"
