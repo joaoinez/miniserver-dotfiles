@@ -10,4 +10,5 @@ export LLAMA_CACHE="/Users/miniserver/Library/Caches/llama.cpp"
   --min-p 0.00 \
   --alias "unsloth/Qwen3.5-9B-GGUF" \
   --port 8001 \
-  --chat-template-kwargs '{"enable_thinking":true}'
+  --chat-template-kwargs '{"enable_thinking":true}' \
+  -np 4
