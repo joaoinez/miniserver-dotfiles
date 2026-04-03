@@ -9,4 +9,4 @@ llama-server \
   --top-k 20 \
   --min-p 0.00 \
   --alias "unsloth/Qwen3.5-0.8B-GGUF" \
-  --port 8001
+  --port 8002
