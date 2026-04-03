@@ -14,28 +14,35 @@ sections:
       - type: gl-current-cpu
         options:
           hostname: http://100.92.88.19:61208
+          apiVersion: 4
       - type: gl-alerts
         options:
           hostname: http://100.92.88.19:61208
+          apiVersion: 4
       - type: gl-network-traffic
         options:
           hostname: http://100.92.88.19:61208
+          apiVersion: 4
           limit: 500
   - name: CPU
     widgets:
       - type: gl-current-cpu
         options:
           hostname: http://100.92.88.19:61208
+          apiVersion: 4
       - type: gl-cpu-history
         options:
           hostname: http://100.92.88.19:61208
+          apiVersion: 4
           limit: 60
   - name: Memory
     widgets:
       - type: gl-current-mem
         options:
           hostname: http://100.92.88.19:61208
+          apiVersion: 4
       - type: gl-mem-history
         options:
           hostname: http://100.92.88.19:61208
+          apiVersion: 4
           limit: 80
