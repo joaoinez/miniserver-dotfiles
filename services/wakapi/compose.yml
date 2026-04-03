@@ -15,7 +15,7 @@ services:
       WAKAPI_DB_PASSWORD: "${WAKAPI_DB_PASSWORD:?WAKAPI_DB_PASSWORD must be set}"
       WAKAPI_PASSWORD_SALT: "${WAKAPI_PASSWORD_SALT:?WAKAPI_PASSWORD_SALT must be set}"
       WAKAPI_PUBLIC_URL: "https://wakapi.sphynx-ule.ts.net"
-      WAKAPI_ALLOW_SIGNUP: "false"
+      WAKAPI_ALLOW_SIGNUP: "true"
       WAKAPI_MAIL_ENABLED: "false"
       ENVIRONMENT: "production"
       WAKAPI_INSECURE_COOKIES: "false"
