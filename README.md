@@ -17,7 +17,6 @@ git --version
 ### Install homebrew
 
 ```shell
-brew install mas
 brew bundle
 ```
 

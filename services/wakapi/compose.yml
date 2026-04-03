@@ -1,0 +1,56 @@
+---
+services:
+  wakapi:
+    image: ghcr.io/muety/wakapi:latest
+    container_name: wakapi
+    init: true
+    restart: unless-stopped
+    network_mode: service:tailscale-wakapi
+    environment:
+      WAKAPI_DB_TYPE: "postgres"
+      WAKAPI_DB_NAME: "wakapi"
+      WAKAPI_DB_USER: "wakapi"
+      WAKAPI_DB_HOST: "wakapi-db"
+      WAKAPI_DB_PORT: "5432"
+      WAKAPI_DB_PASSWORD: "${WAKAPI_DB_PASSWORD:?WAKAPI_DB_PASSWORD must be set}"
+      WAKAPI_PASSWORD_SALT: "${WAKAPI_PASSWORD_SALT:?WAKAPI_PASSWORD_SALT must be set}"
+      WAKAPI_PUBLIC_URL: "https://wakapi.sphynx-ule.ts.net"
+      WAKAPI_ALLOW_SIGNUP: "false"
+      WAKAPI_MAIL_ENABLED: "false"
+      ENVIRONMENT: "production"
+      WAKAPI_INSECURE_COOKIES: "false"
+    depends_on:
+      - wakapi-db
+      - tailscale-wakapi
+
+  wakapi-db:
+    image: postgres:17
+    container_name: wakapi-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: "wakapi"
+      POSTGRES_PASSWORD: "${WAKAPI_DB_PASSWORD:?WAKAPI_DB_PASSWORD must be set}"
+      POSTGRES_DB: "wakapi"
+    volumes:
+      - wakapi-db-data:/var/lib/postgresql/data
+
+  tailscale-wakapi:
+    image: tailscale/tailscale:latest
+    container_name: ts-wakapi
+    hostname: wakapi
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_SERVE_CONFIG=/config/ts-serve-config.json
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+      - ./:/config:ro
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+volumes:
+  wakapi-db-data:
+  tailscale-state:
