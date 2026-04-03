@@ -74,16 +74,6 @@ launchctl load ~/Library/LaunchAgents/com.user.serve-small-llm.plist
 launchctl load ~/Library/LaunchAgents/com.user.start-glances.plist
 ```
 
-### Renew Tailscale certs
-
-Run this once before starting services that use the certs.
-
-```shell
-./scripts/renew-tailscale-certs.sh
-```
-
-The certs are stored in `~/.local/share/certs/`.
-
 ## Resources
 
 * <https://wiki.bazarr.media/>

@@ -14,7 +14,7 @@ mkdir -p "$CERTS_DIR"
   --key-file "$CERTS_DIR/$DOMAIN.key" \
   "$DOMAIN"
 
-# Convert to PKCS#12 format for Jellyfin
+# Convert to PKCS#12 format
 openssl pkcs12 -export \
   -out "$CERTS_DIR/$DOMAIN.p12" \
   -inkey "$CERTS_DIR/$DOMAIN.key" \
