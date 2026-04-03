@@ -12,30 +12,37 @@ sections:
           format: en-US
           hideDate: false
       - type: gl-current-cpu
+        useProxy: true
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
       - type: gl-alerts
+        useProxy: true
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
       - type: gl-network-traffic
+        useProxy: true
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
           limit: 500
   - name: CPU
     widgets:
       - type: gl-current-cpu
+        useProxy: true
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
       - type: gl-cpu-history
+        useProxy: true
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
           limit: 60
   - name: Memory
     widgets:
       - type: gl-current-mem
+        useProxy: true
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
       - type: gl-mem-history
+        useProxy: true
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
           limit: 80
