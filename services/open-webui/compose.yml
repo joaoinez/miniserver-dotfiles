@@ -16,6 +16,8 @@ services:
     image: tailscale/tailscale:latest
     container_name: ts-open-webui
     hostname: open-webui
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
       - TS_STATE_DIR=/var/lib/tailscale
