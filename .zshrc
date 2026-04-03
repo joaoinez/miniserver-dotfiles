@@ -26,6 +26,7 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+alias ll="ls -la"
 alias vim="nvim"
 alias source-zsh="source ~/.zshrc && source ~/.zshenv && source ~/.zprofile"
 alias gfp="git fetch && git pull"
