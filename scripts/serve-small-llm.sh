@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export LLAMA_CACHE="unsloth/Qwen3.5-0.8B-GGUF"
+export LLAMA_CACHE="/Users/miniserver/Library/Caches/llama.cpp"
 /opt/homebrew/bin/llama-server \
   -hf unsloth/Qwen3.5-0.8B-GGUF:UD-Q4_K_XL \
   --ctx-size 16384 \
