@@ -60,7 +60,13 @@ stow --restow --adopt .
 
 ```shell
 launchctl load ~/Library/LaunchAgents/com.user.serve-chat-llm.plist
+```
+
+```shell
 launchctl load ~/Library/LaunchAgents/com.user.serve-small-llm.plist
+```
+
+```shell
 launchctl load ~/Library/LaunchAgents/com.user.start-glances.plist
 ```
 
