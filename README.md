@@ -8,6 +8,16 @@
 
 ## Setup
 
+### Settings
+
+#### `Energy`
+
+##### Enable `Prevent automatic sleeping when the display is off`
+
+##### Enable `Wake for network access`
+
+##### Enable `Start up automatically after a power failure`
+
 ### Install `git`
 
 ```shell
