@@ -36,21 +36,33 @@ brew bundle
 ./scripts/run-services.sh
 ```
 
-### Start `Glances`
+### Sync folder with `~`
+
+#### To link `dotfiles` with `~`
 
 ```shell
-glances -w
+stow --no-folding .
 ```
 
-<!-- ### Create a cron job to restart arr suite containers everyday at midnight
+#### After a change in `dotfiles`
 
 ```shell
-crontab -e
+stow --restow .
 ```
 
-```crontab
-0 0 * * * /Users/miniserver/.local/bin/restart-arrsuite.sh
-``` -->
+#### After a change in `~`
+
+```shell
+stow --restow --adopt .
+```
+
+### Load `launchd` agents
+
+```shell
+launchctl load ~/Library/LaunchAgents/com.user.serve-chat-llm.plist
+launchctl load ~/Library/LaunchAgents/com.user.serve-small-llm.plist
+launchctl load ~/Library/LaunchAgents/com.user.start-glances.plist
+```
 
 ## Resources
 
