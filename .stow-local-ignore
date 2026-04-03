@@ -24,6 +24,6 @@ _darcs
 ^/Brewfile
 \.DS_Store
 
-\docs
-\scripts
-\services
+^/docs
+^/scripts
+^/services
