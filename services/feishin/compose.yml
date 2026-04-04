@@ -4,7 +4,7 @@ services:
     container_name: feishin
     image: "ghcr.io/jeffvli/feishin:latest"
     restart: unless-stopped
-    network_mode: service:tailscale-navidrome
+    network_mode: service:tailscale-feishin
     environment:
       - SERVER_NAME=feishin
       - SERVER_LOCK=true
