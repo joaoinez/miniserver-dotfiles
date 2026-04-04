@@ -1,10 +1,27 @@
 ---
 pageInfo:
-  title: Mini Server
+  title: Miniserver
 appConfig:
   preventWriteToDisk: true
   preventLocalSave: true
   disableConfiguration: true
+  theme: glow-dark
+  glass:
+    primary: "#fff"
+    background: "#190842"
+    background-darker: "#190842"
+    font-headings: '"Roboto","Segoe UI","Ariel","sans-serif"'
+    font-body: '"Roboto","Segoe UI","Ariel","sans-serif"'
+    font-monospace: '"PTMono","Courier New",monospace'
+  glass-2:
+    primary: "#fff"
+    background: "#190842"
+    background-darker: "#190842"
+    font-headings: '"Roboto","Segoe UI","Ariel","sans-serif"'
+    font-body: '"Roboto","Segoe UI","Ariel","sans-serif"'
+    font-monospace: '"PTMono","Courier New",monospace'
+  layout: auto
+  iconSize: medium
 sections:
   - name: System
     widgets:
@@ -23,6 +40,28 @@ sections:
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
           limit: 500
+  - name: Apps
+    items:
+      - title: Open WebUI
+        icon: generative
+        url: https://chat.sphynx-ule.ts.net
+      - title: WakaTime
+        icon: generative
+        url: https://wakapi.sphynx-ule.ts.net
+  - name: Services
+    items:
+      - title: Glances
+        icon: generative
+        url: https://miniserver.sphynx-ule.ts.net:61208
+      - title: Dozzle
+        icon: generative
+        url: https://dozzle.sphynx-ule.ts.net
+      - title: Jellyfin
+        icon: generative
+        url: https://miniserver.sphynx-ule.ts.net:8920
+      - title: Navidrome
+        icon: generative
+        url: https://navidrome.sphynx-ule.ts.net
   - name: CPU
     widgets:
       - type: gl-current-cpu
@@ -41,27 +80,3 @@ sections:
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
           limit: 80
-  - name: Monitoring
-    items:
-      - title: Glances
-        icon: generative
-        url: https://miniserver.sphynx-ule.ts.net:61208
-      - title: Dozzle
-        icon: generative
-        url: https://dozzle.sphynx-ule.ts.net
-  - name: Apps
-    items:
-      - title: Open WebUI
-        icon: generative
-        url: https://chat.sphynx-ule.ts.net
-      - title: WakaTime
-        icon: generative
-        url: https://wakapi.sphynx-ule.ts.net
-  - name: Admin
-    items:
-      - title: Jellyfin
-        icon: generative
-        url: https://miniserver.sphynx-ule.ts.net:8920
-      - title: Navidrome
-        icon: generative
-        url: https://navidrome.sphynx-ule.ts.net
