@@ -1,18 +1,23 @@
 ---
 services:
-  navidrome:
-    image: deluan/navidrome:latest
-    container_name: navidrome
+  feishin:
+    container_name: feishin
+    image: "ghcr.io/jeffvli/feishin:latest"
     restart: unless-stopped
     network_mode: service:tailscale-navidrome
-    volumes:
-      - "navidrome:/data"
-      - "/Users/miniserver/Music:/music:ro"
+    environment:
+      - SERVER_NAME=feishin
+      - SERVER_LOCK=true
+      - SERVER_TYPE=navidrome
+      - SERVER_URL=http://ts-navidrome:4533
+      - REMOTE_URL=https://navidrome.sphynx-ule.ts.net
+      - LEGACY_AUTHENTICATION=false
+      - ANALYTICS_DISABLED=true
 
-  tailscale-navidrome:
+  tailscale-feishin:
     image: tailscale/tailscale:latest
-    container_name: ts-navidrome
-    hostname: navidrome
+    container_name: ts-feishin
+    hostname: feishin
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
@@ -30,9 +35,6 @@ services:
       - NET_ADMIN
     restart: unless-stopped
 
-volumes:
-  navidrome:
-  tailscale-state:
-
 networks:
   navidrome-net:
+    external: true
