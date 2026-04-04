@@ -23,20 +23,15 @@ appConfig:
   layout: auto
   iconSize: medium
 sections:
-  - name: System
+  - name: Misc
     widgets:
       - type: clock
         options:
           timeZone: Europe/Amsterdam
-          format: en-US
+          format: en-GB
+          hideSeconds: true
           hideDate: false
-      - type: gl-alerts
-        options:
-          hostname: https://miniserver.sphynx-ule.ts.net:61208
-      - type: gl-network-traffic
-        options:
-          hostname: https://miniserver.sphynx-ule.ts.net:61208
-          limit: 500
+
   - name: Apps
     items:
       - title: Open WebUI
@@ -45,6 +40,7 @@ sections:
       - title: WakaTime
         icon: generative
         url: https://wakapi.sphynx-ule.ts.net
+
   - name: Services
     items:
       - title: Glances
@@ -59,6 +55,17 @@ sections:
       - title: Navidrome
         icon: generative
         url: https://navidrome.sphynx-ule.ts.net
+
+  - name: System
+    widgets:
+      - type: gl-alerts
+        options:
+          hostname: https://miniserver.sphynx-ule.ts.net:61208
+      - type: gl-network-traffic
+        options:
+          hostname: https://miniserver.sphynx-ule.ts.net:61208
+          limit: 500
+
   - name: CPU
     widgets:
       - type: gl-current-cpu
@@ -68,6 +75,7 @@ sections:
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
           limit: 60
+
   - name: Memory
     widgets:
       - type: gl-current-mem
