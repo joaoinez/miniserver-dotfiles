@@ -30,9 +30,6 @@ sections:
           timeZone: Europe/Amsterdam
           format: en-US
           hideDate: false
-      - type: gl-current-cpu
-        options:
-          hostname: https://miniserver.sphynx-ule.ts.net:61208
       - type: gl-alerts
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
