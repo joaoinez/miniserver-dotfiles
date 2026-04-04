@@ -35,6 +35,9 @@ services:
       - NET_ADMIN
     restart: unless-stopped
 
+volumes:
+  tailscale-state:
+
 networks:
   navidrome-net:
     external: true
