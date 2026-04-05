@@ -9,7 +9,7 @@ services:
       - SERVER_NAME=feishin
       - SERVER_LOCK=true
       - SERVER_TYPE=navidrome
-      - SERVER_URL=http://ts-navidrome:4533
+      - SERVER_URL=https://ts-navidrome:4533
       - REMOTE_URL=https://navidrome.sphynx-ule.ts.net
       - LEGACY_AUTHENTICATION=false
       - ANALYTICS_DISABLED=true

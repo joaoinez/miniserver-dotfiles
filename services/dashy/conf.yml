@@ -34,6 +34,9 @@ sections:
 
   - name: Apps
     items:
+      - title: Feishin
+        icon: generative
+        url: https://feishin.sphynx-ule.ts.net
       - title: Open WebUI
         icon: generative
         url: https://chat.sphynx-ule.ts.net
