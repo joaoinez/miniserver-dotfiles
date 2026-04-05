@@ -43,6 +43,9 @@ sections:
 
   - name: Services
     items:
+      - title: Tailscale
+        icon: generative
+        url: https://login.tailscale.com/admin
       - title: Glances
         icon: generative
         url: https://miniserver.sphynx-ule.ts.net:61208

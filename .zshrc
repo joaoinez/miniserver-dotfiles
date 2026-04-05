@@ -30,7 +30,9 @@ alias ll="ls -la"
 alias vim="nvim"
 alias source-zsh="source ~/.zshrc && source ~/.zshenv && source ~/.zprofile"
 alias gfp="git fetch && git pull"
+alias gst="git status"
 alias launchctls="launchctl list | grep -v com.user"
+alias prune="docker system prune -a --volumes -f"
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
