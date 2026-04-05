@@ -41,3 +41,4 @@ volumes:
 networks:
   navidrome-net:
     external: true
+    name: navidrome-bridge
