@@ -5,8 +5,6 @@ services:
     container_name: navidrome
     restart: unless-stopped
     network_mode: service:tailscale-navidrome
-    environment:
-      - ND_CORS_ALLOWEDORIGINS=https://navidrome.sphynx-ule.ts.net,https://feishin.sphynx-ule.ts.net
     volumes:
       - "navidrome:/data"
       - "/Users/miniserver/Music:/music:ro"
@@ -17,8 +15,6 @@ services:
     hostname: navidrome
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    networks:
-      - navidrome-net
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
       - TS_STATE_DIR=/var/lib/tailscale
@@ -35,7 +31,3 @@ services:
 volumes:
   navidrome:
   tailscale-state:
-
-networks:
-  navidrome-net:
-    name: navidrome-bridge
