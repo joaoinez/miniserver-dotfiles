@@ -22,6 +22,7 @@ services:
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=false
       - TS_SERVE_CONFIG=/config/ts-serve-config.json
+      - ND_CORS_ALLOWEDORIGINS=https://navidrome.sphynx-ule.ts.net,https://feishin.sphynx-ule.ts.net
     volumes:
       - tailscale-state:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
