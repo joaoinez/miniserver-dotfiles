@@ -1,6 +1,6 @@
 services:
   karakeep-web:
-    image: ghcr.io/karakeep-app/karakeep:latest
+    image: ghcr.io/karakeep-app/karakeep:0.31.0
     container_name: karakeep-web
     restart: unless-stopped
     network_mode: service:tailscale-karakeep
@@ -16,6 +16,9 @@ services:
       OPENAI_BASE_URL: https://openrouter.ai/api/v1
       INFERENCE_TEXT_MODEL: qwen/qwen3.6-plus:free
       INFERENCE_IMAGE_MODEL: qwen/qwen3.6-plus:free
+      INFERENCE_JOB_TIMEOUT_SEC: 300
+      INFERENCE_ENABLE_AUTO_TAGGING: true
+      INFERENCE_ENABLE_AUTO_SUMMARIZATION: true
 
   karakeep-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:124
