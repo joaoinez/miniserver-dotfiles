@@ -1,0 +1,60 @@
+services:
+  karakeep-web:
+    image: ghcr.io/karakeep-app/karakeep:latest
+    restart: unless-stopped
+    network_mode: service:tailscale-karakeep
+    volumes:
+      - data:/data
+    env_file:
+      - .env
+    environment:
+      MEILI_ADDR: http://karakeep-meilisearch:7700
+      BROWSER_WEB_URL: http://karakeep-chrome:9222
+      DATA_DIR: /data
+      NEXTAUTH_URL: https://karakeep.sphynx-ule.ts.net
+      OPENAI_BASE_URL: https://openrouter.ai/api/v1
+      INFERENCE_TEXT_MODEL: qwen/qwen3.6-plus:free
+      INFERENCE_IMAGE_MODEL: qwen/qwen3.6-plus:free
+
+  karakeep-chrome:
+    image: gcr.io/zenika-hub/alpine-chrome:124
+    restart: unless-stopped
+    command:
+      - --no-sandbox
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --remote-debugging-address=0.0.0.0
+      - --remote-debugging-port=9222
+      - --hide-scrollbars
+
+  karakeep-meilisearch:
+    image: getmeili/meilisearch:v1.37.0
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MEILI_NO_ANALYTICS: "true"
+    volumes:
+      - meilisearch:/meili_data
+
+  tailscale-karakeep:
+    image: tailscale/tailscale:latest
+    container_name: ts-karakeep
+    hostname: karakeep
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_SERVE_CONFIG=/config/ts-serve-config.json
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+      - ./:/config:ro
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+volumes:
+  meilisearch:
+  data:
+  tailscale-state:
