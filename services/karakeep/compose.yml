@@ -1,6 +1,7 @@
 services:
   karakeep-web:
     image: ghcr.io/karakeep-app/karakeep:latest
+    container_name: karakeep-web
     restart: unless-stopped
     network_mode: service:tailscale-karakeep
     volumes:
@@ -18,6 +19,7 @@ services:
 
   karakeep-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:124
+    container_name: karakeep-chrome
     restart: unless-stopped
     command:
       - --no-sandbox
@@ -29,6 +31,7 @@ services:
 
   karakeep-meilisearch:
     image: getmeili/meilisearch:v1.37.0
+    container_name: karakeep-meilisearch
     restart: unless-stopped
     env_file:
       - .env
