@@ -6,7 +6,7 @@ services:
     container_name: qbittorrent
     depends_on:
       - gluetun
-    network_mode: service:arrsuite-gluetun
+    network_mode: service:gluetun
     environment:
       - PUID=1000
       - PGID=1000
