@@ -1,0 +1,45 @@
+---
+services:
+  # https://github.com/qdm12/gluetun-wiki/blob/main/setup/popular-apps.md
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    depends_on:
+      - gluetun
+    network_mode: service:arrsuite-gluetun
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - qbittorrent:/config
+      - ~/Media/Downloads:/downloads
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      # see https://github.com/qdm12/gluetun-wiki for more details
+      # example envs based on https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY:?WIREGUARD_PRIVATE_KEY must be set}
+      - SERVER_COUNTRIES=Netherlands
+    volumes:
+      - gluetun:/gluetun
+
+volumes:
+  qbittorrent:
+  gluetun:
