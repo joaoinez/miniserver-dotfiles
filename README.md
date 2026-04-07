@@ -36,6 +36,14 @@ brew bundle
 ./scripts/run-services.sh
 ```
 
+### qBittorrent note
+
+Set up qBittorrent with Gluetun before using magnet links.
+
+If you skip this, magnet links will not work.
+
+<https://github.com/qdm12/gluetun-wiki/blob/main/setup/popular-apps.md>
+
 ### Sync folder with `~`
 
 #### To link `dotfiles` with `~`
