@@ -37,6 +37,9 @@ sections:
       - title: Open WebUI
         icon: generative
         url: https://chat.sphynx-ule.ts.net
+      - title: Karakeep
+        icon: generative
+        url: https://karakeep.sphynx-ule.ts.net
       - title: Feishin
         icon: generative
         url: https://feishin.sphynx-ule.ts.net
