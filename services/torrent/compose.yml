@@ -26,6 +26,10 @@ services:
       - NET_ADMIN
     devices:
       - /dev/net/tun:/dev/net/tun
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
     environment:
       # see https://github.com/qdm12/gluetun-wiki for more details
       # example envs based on https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md
