@@ -38,6 +38,7 @@ alias down="docker compose down"
 alias up="docker compose up --pull always --force-recreate -d"
 alias prune="docker system prune -a --volumes -f"
 alias restart="docker compose down && docker compose up --pull always --force-recreate -d && docker system prune -a --volumes -f"
+alias audio-parser='opencode run --agent audio-parser-updater'
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
