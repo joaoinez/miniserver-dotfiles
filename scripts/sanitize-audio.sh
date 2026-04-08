@@ -75,8 +75,39 @@ is_audio_file() {
     -of default=noprint_wrappers=1:nokey=1 "$file" 2>/dev/null | grep -q audio
 }
 
+# Returns 0 if file has an embedded image stream, 1 otherwise
+has_embedded_image() {
+  local file="$1"
+  ffprobe -v error -select_streams v:0 -show_entries stream=codec_type \
+    -of default=noprint_wrappers=1:nokey=1 "$file" 2>/dev/null | grep -q video
+}
+
+# Finds a single cover image in a directory.
+# Sets COVER_IMAGE to the path, or "" if none found.
+# Prints a warning and returns 1 if multiple images are found.
+find_cover_image() {
+  local dir="$1"
+  COVER_IMAGE=""
+  local images=()
+  while IFS= read -r -d '' f; do
+    images+=("$f")
+  done < <(find "$dir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print0 | sort -z)
+
+  if [[ ${#images[@]} -gt 1 ]]; then
+    echo "  WARNING: multiple cover images found in $(basename "$dir") — skipping embed. Remove all but one:" >&2
+    for img in "${images[@]}"; do
+      echo "    $(basename "$img")" >&2
+    done
+    return 1
+  fi
+
+  [[ ${#images[@]} -eq 1 ]] && COVER_IMAGE="${images[0]}"
+  return 0
+}
+
 process_file() {
   local src="$1"
+  local cover="${2:-}" # optional path to a cover image
   local filename
   filename="$(basename "$src")"
   local ext="${filename##*.}"
@@ -141,7 +172,14 @@ process_file() {
   [[ -f "$out_file" ]] && overwrite_note=" (overwritten)"
 
   # --- Write output file ---
-  local ffmpeg_args=(-v error -y -i "$src" -c copy)
+  local ffmpeg_args=(-v error -y -i "$src")
+
+  if [[ -n "$cover" ]] && ! has_embedded_image "$src"; then
+    ffmpeg_args+=(-i "$cover" -map 0 -map 1 -c copy -disposition:v:0 attached_pic)
+  else
+    ffmpeg_args+=(-c copy)
+  fi
+
   [[ -n "$final_track" ]] && ffmpeg_args+=(-metadata "track=$final_track")
   ffmpeg_args+=(-metadata "title=$final_title" "$out_file")
 
@@ -167,8 +205,11 @@ while IFS= read -r -d '' album_dir; do
   album_name="$(basename "$album_dir")"
   echo "Album: $album_name"
 
+  COVER_IMAGE=""
+  find_cover_image "$album_dir" || true
+
   while IFS= read -r -d '' src_file; do
-    if process_file "$src_file"; then
+    if process_file "$src_file" "$COVER_IMAGE"; then
       ((file_count++)) || true
     else
       ((error_count++)) || true
