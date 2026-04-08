@@ -230,7 +230,7 @@ mkdir -p "$MUSIC_DIR"
 
 skipped_count=0
 while IFS= read -r -d '' src_file; do
-  rel="${src_file#$OUTPUT_DIR/}"
+  rel="${src_file#"$OUTPUT_DIR"/}"
   dest_file="$MUSIC_DIR/$rel"
   if [[ -f "$dest_file" ]]; then
     echo "  skip  $rel (already exists in ~/Music)" >&2
@@ -244,6 +244,9 @@ done < <(find "$OUTPUT_DIR" -type f -print0 | sort -z)
 
 # Remove empty dirs left behind in out/
 find "$OUTPUT_DIR" -type d -empty -delete 2>/dev/null || true
+
+rm -rf "$INPUT_DIR"
+mkdir "$CWD"/in
 
 echo ""
 echo "Merge done. Skipped: $skipped_count"
