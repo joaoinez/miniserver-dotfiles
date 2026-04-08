@@ -221,3 +221,29 @@ while IFS= read -r -d '' album_dir; do
 done < <(find "$INPUT_DIR" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z)
 
 echo "Done. Parser: $PARSER_NAME  Albums: $album_count  Files: $file_count  Errors: $error_count"
+
+# --- Merge out/ into ~/Music ---
+MUSIC_DIR="$HOME/Music"
+echo ""
+echo "Merging $OUTPUT_DIR -> $MUSIC_DIR ..."
+mkdir -p "$MUSIC_DIR"
+
+skipped_count=0
+while IFS= read -r -d '' src_file; do
+  rel="${src_file#$OUTPUT_DIR/}"
+  dest_file="$MUSIC_DIR/$rel"
+  if [[ -f "$dest_file" ]]; then
+    echo "  skip  $rel (already exists in ~/Music)" >&2
+    ((skipped_count++)) || true
+  else
+    mkdir -p "$(dirname "$dest_file")"
+    mv "$src_file" "$dest_file"
+    echo "  moved $rel"
+  fi
+done < <(find "$OUTPUT_DIR" -type f -print0 | sort -z)
+
+# Remove empty dirs left behind in out/
+find "$OUTPUT_DIR" -type d -empty -delete 2>/dev/null || true
+
+echo ""
+echo "Merge done. Skipped: $skipped_count"
