@@ -82,6 +82,12 @@ launchctl load ~/Library/LaunchAgents/com.user.serve-small-llm.plist
 launchctl load ~/Library/LaunchAgents/com.user.start-glances.plist
 ```
 
+### Install OpenCode
+
+```bash
+curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path
+```
+
 ## Resources
 
 * <https://wiki.bazarr.media/>
