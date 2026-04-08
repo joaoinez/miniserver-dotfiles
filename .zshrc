@@ -5,8 +5,10 @@ export EDITOR="nvim"
 export MANPAGER="nvim +Man!"
 export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH=$PATH:$HOME/.local/bin
+export PATH=/Users/joaoinez/.opencode/bin:$PATH
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
+export OPENCODE_ENABLE_EXA=1 opencode
 
 autoload -Uz compinit && compinit
 
