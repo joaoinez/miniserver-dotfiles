@@ -64,6 +64,9 @@ sections:
       - title: Navidrome
         icon: generative
         url: https://navidrome.sphynx-ule.ts.net
+      - title: Qbittorrent
+        icon: generative
+        url: http://miniserver.sphynx-ule.ts.net:8080
 
   - name: System
     widgets:
@@ -94,3 +97,24 @@ sections:
         options:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
           limit: 80
+
+  - name: Resources
+    items:
+      - title: FMHY
+        icon: generative
+        url: https://fmhy.net
+      - title: Wotaku
+        icon: generative
+        url: https://wotaku.wiki
+      - title: Wotaku
+        icon: generative
+        url: https://wotaku.wiki
+      - title: EXT
+        icon: generative
+        url: https://ext.to
+      - title: SeaDex
+        icon: generative
+        url: https://releases.moe/about
+      - title: Monochrome
+        icon: generative
+        url: https://monochrome.tf
