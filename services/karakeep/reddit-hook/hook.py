@@ -47,7 +47,8 @@ def rewrite_url(url: str) -> str | None:
     return f"{m.group(1)}old.reddit.com{m.group(2) or ''}"
 
 
-def api_request(method: str, path: str, body: dict | None = None) -> dict | None:
+def api_request(method: str, path: str, body: dict | None = None) -> tuple[bool, dict]:
+    """Returns (success, response_body). success=True even for 204 No Content."""
     url = f"{KARAKEEP_API_URL}/api/v1{path}"
     data = json.dumps(body).encode() if body is not None else None
     req = urllib.request.Request(
@@ -62,12 +63,12 @@ def api_request(method: str, path: str, body: dict | None = None) -> dict | None
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
             raw = resp.read()
-            return json.loads(raw) if raw else {}
+            return True, (json.loads(raw) if raw else {})
     except urllib.error.HTTPError as e:
         print(f"[hook] API error {e.code} {method} {path}: {e.read().decode()}")
     except Exception as e:
         print(f"[hook] Request failed {method} {path}: {e}")
-    return None
+    return False, {}
 
 
 def handle_event(event: dict):
@@ -75,29 +76,34 @@ def handle_event(event: dict):
 
     # Only act on newly created bookmarks
     if operation != "created":
+        print(f"[hook] Ignoring operation '{operation}'")
         return
 
     url = event.get("url")
     bookmark_id = event.get("bookmarkId")
 
     if not url or not bookmark_id:
+        print(f"[hook] Missing url or bookmarkId in event, skipping.")
         return
+
+    print(f"[hook] Received 'created' event for bookmark {bookmark_id} url={url}")
 
     new_url = rewrite_url(url)
     if not new_url:
+        print(f"[hook] Not a reddit URL, skipping.")
         return
 
-    print(f"[hook] Rewriting {url} -> {new_url} (bookmark {bookmark_id})")
+    print(f"[hook] Rewriting {url} -> {new_url}")
 
-    # Fetch the full bookmark to preserve tags, lists, etc.
-    bookmark = api_request("GET", f"/bookmarks/{bookmark_id}")
-    if not bookmark:
+    # Fetch the full bookmark to preserve title if already set
+    ok, bookmark = api_request("GET", f"/bookmarks/{bookmark_id}")
+    if not ok:
         print(f"[hook] Could not fetch bookmark {bookmark_id}, aborting.")
         return
 
     # Delete the original bookmark
-    result = api_request("DELETE", f"/bookmarks/{bookmark_id}")
-    if result is None:
+    ok, _ = api_request("DELETE", f"/bookmarks/{bookmark_id}")
+    if not ok:
         print(f"[hook] Failed to delete bookmark {bookmark_id}, aborting.")
         return
 
@@ -109,16 +115,17 @@ def handle_event(event: dict):
     if title:
         payload["title"] = title
 
-    new_bookmark = api_request("POST", "/bookmarks", payload)
-    if new_bookmark:
+    ok, new_bookmark = api_request("POST", "/bookmarks", payload)
+    if ok:
         print(f"[hook] Created new bookmark {new_bookmark.get('id')} for {new_url}")
     else:
         print(f"[hook] Failed to recreate bookmark for {new_url}")
 
 
 class Handler(BaseHTTPRequestHandler):
-    def log_message(self, format, *args):  # suppress default access log noise
-        pass
+    def log_message(self, format, *args):
+        # Re-enable request logging
+        print(f"[hook] {self.address_string()} - {format % args}")
 
     def do_POST(self):
         length = int(self.headers.get("Content-Length", 0))
