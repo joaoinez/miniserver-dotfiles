@@ -24,8 +24,9 @@ services:
     build: ./reddit-hook
     container_name: karakeep-reddit-hook
     restart: unless-stopped
+    network_mode: service:tailscale-karakeep
     environment:
-      KARAKEEP_API_URL: http://karakeep-web:3000
+      KARAKEEP_API_URL: http://localhost:3000
       KARAKEEP_API_KEY: ${KARAKEEP_API_KEY:?KARAKEEP_API_KEY must be set}
       LISTEN_PORT: "7999"
 
