@@ -28,7 +28,7 @@ services:
     environment:
       KARAKEEP_API_URL: http://localhost:3000
       KARAKEEP_API_KEY: ${KARAKEEP_API_KEY:?KARAKEEP_API_KEY must be set}
-      LISTEN_PORT: "7999"
+      LISTEN_PORT: "7998"
 
   karakeep-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:124
