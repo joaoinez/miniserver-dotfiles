@@ -20,15 +20,6 @@ services:
       INFERENCE_ENABLE_AUTO_TAGGING: true
       INFERENCE_ENABLE_AUTO_SUMMARIZATION: true
 
-  karakeep-reddit-hook:
-    build: ./reddit-hook
-    container_name: karakeep-reddit-hook
-    restart: unless-stopped
-    environment:
-      KARAKEEP_API_URL: http://karakeep-web:3000
-      KARAKEEP_API_KEY: ${KARAKEEP_API_KEY:?KARAKEEP_API_KEY must be set}
-      LISTEN_PORT: "7999"
-
   karakeep-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:124
     container_name: karakeep-chrome
