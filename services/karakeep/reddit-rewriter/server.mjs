@@ -98,6 +98,31 @@ function tryParseJson(text) {
   }
 }
 
+function buildCreateBookmarkPayload(bookmark, rewrittenUrl) {
+  const createPayload = {
+    type: "link",
+    url: rewrittenUrl,
+  };
+
+  if (typeof bookmark.title === "string") {
+    createPayload.title = bookmark.title;
+  }
+
+  if (typeof bookmark.archived === "boolean") {
+    createPayload.archived = bookmark.archived;
+  }
+
+  if (typeof bookmark.favourited === "boolean") {
+    createPayload.favourited = bookmark.favourited;
+  }
+
+  if (typeof bookmark.note === "string" && bookmark.note.length > 0) {
+    createPayload.note = bookmark.note;
+  }
+
+  return createPayload;
+}
+
 function toOldRedditUrl(rawUrl) {
   const url = new URL(rawUrl);
 
@@ -148,20 +173,11 @@ async function rewriteBookmark(payload) {
   const bookmark = await karakeepRequest(
     `/api/v1/bookmarks/${payload.bookmarkId}`,
   );
+  const createPayload = buildCreateBookmarkPayload(bookmark, rewrittenUrl);
 
   const created = await karakeepRequest("/api/v1/bookmarks", {
     method: "POST",
-    body: JSON.stringify({
-      type: "link",
-      url: rewrittenUrl,
-      title: bookmark.title,
-      archived: bookmark.archived,
-      favourited: bookmark.favourited,
-      note: bookmark.note,
-      summary: bookmark.summary,
-      createdAt: bookmark.createdAt,
-      source: bookmark.source,
-    }),
+    body: JSON.stringify(createPayload),
   });
 
   await karakeepRequest(`/api/v1/bookmarks/${payload.bookmarkId}`, {
@@ -213,7 +229,12 @@ const server = http.createServer(async (request, response) => {
 
     return json(response, 200, { ok: true, result });
   } catch (error) {
-    console.error("Failed to process Karakeep webhook", error);
+    console.error("Failed to process Karakeep webhook", {
+      message: error.message,
+      status: error.status,
+      data: error.data,
+      stack: error.stack,
+    });
     return json(response, 500, {
       error: "processing_failed",
       message: error.message,
