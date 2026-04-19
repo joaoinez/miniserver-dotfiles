@@ -13,12 +13,29 @@ services:
       BROWSER_WEB_URL: http://karakeep-chrome:9222
       DATA_DIR: /data
       NEXTAUTH_URL: https://karakeep.sphynx-ule.ts.net
+      WEBHOOK_TOKEN: ${WEBHOOK_TOKEN:?WEBHOOK_TOKEN must be set}
+      CRAWLER_ALLOWED_INTERNAL_HOSTNAMES: karakeep-reddit-rewriter
       OPENAI_BASE_URL: https://openrouter.ai/api/v1
       INFERENCE_TEXT_MODEL: openai/gpt-oss-120b:nitro
       INFERENCE_IMAGE_MODEL: openai/gpt-oss-120b:nitro
       INFERENCE_JOB_TIMEOUT_SEC: 300
       INFERENCE_ENABLE_AUTO_TAGGING: true
       INFERENCE_ENABLE_AUTO_SUMMARIZATION: true
+
+  karakeep-reddit-rewriter:
+    image: node:22-alpine
+    container_name: karakeep-reddit-rewriter
+    restart: unless-stopped
+    command:
+      - node
+      - /app/server.mjs
+    volumes:
+      - ./reddit-rewriter:/app:ro
+    environment:
+      PORT: 8080
+      WEBHOOK_TOKEN: ${WEBHOOK_TOKEN:?WEBHOOK_TOKEN must be set}
+      KARAKEEP_API_TOKEN: ${KARAKEEP_API_TOKEN:?KARAKEEP_API_TOKEN must be set}
+      KARAKEEP_BASE_URL: http://tailscale-karakeep:3000
 
   karakeep-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:124

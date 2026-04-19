@@ -1,0 +1,226 @@
+import http from "node:http";
+
+const port = Number(process.env.PORT || 8080);
+const webhookToken = process.env.WEBHOOK_TOKEN;
+const karakeepApiToken = process.env.KARAKEEP_API_TOKEN;
+const karakeepBaseUrl = (
+  process.env.KARAKEEP_BASE_URL || "http://tailscale-karakeep:3000"
+).replace(/\/$/, "");
+
+if (!webhookToken) {
+  throw new Error("WEBHOOK_TOKEN is required");
+}
+
+if (!karakeepApiToken) {
+  throw new Error("KARAKEEP_API_TOKEN is required");
+}
+
+const processedJobs = new Map();
+const processedJobTtlMs = 60 * 60 * 1000;
+
+setInterval(() => {
+  const now = Date.now();
+
+  for (const [jobId, processedAt] of processedJobs.entries()) {
+    if (now - processedAt > processedJobTtlMs) {
+      processedJobs.delete(jobId);
+    }
+  }
+}, processedJobTtlMs).unref();
+
+function log(message, extra) {
+  if (extra === undefined) {
+    console.log(message);
+    return;
+  }
+
+  console.log(message, extra);
+}
+
+function json(response, statusCode, payload) {
+  response.writeHead(statusCode, { "Content-Type": "application/json" });
+  response.end(JSON.stringify(payload));
+}
+
+function collectJson(request) {
+  return new Promise((resolve, reject) => {
+    let body = "";
+
+    request.on("data", (chunk) => {
+      body += chunk;
+    });
+
+    request.on("end", () => {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    request.on("error", reject);
+  });
+}
+
+async function karakeepRequest(path, options = {}) {
+  const response = await fetch(`${karakeepBaseUrl}${path}`, {
+    ...options,
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${karakeepApiToken}`,
+      ...(options.body ? { "Content-Type": "application/json" } : {}),
+      ...(options.headers || {}),
+    },
+  });
+
+  if (response.status === 204) {
+    return null;
+  }
+
+  const text = await response.text();
+  const data = text ? tryParseJson(text) : null;
+
+  if (!response.ok) {
+    const error = new Error(`Karakeep request failed with ${response.status}`);
+    error.status = response.status;
+    error.data = data;
+    throw error;
+  }
+
+  return data;
+}
+
+function tryParseJson(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return text;
+  }
+}
+
+function toOldRedditUrl(rawUrl) {
+  const url = new URL(rawUrl);
+
+  if (url.hostname.toLowerCase() !== "www.reddit.com") {
+    return null;
+  }
+
+  url.hostname = "old.reddit.com";
+  return url.toString();
+}
+
+function rememberJob(jobId) {
+  if (!jobId) {
+    return;
+  }
+
+  processedJobs.set(jobId, Date.now());
+}
+
+function hasProcessedJob(jobId) {
+  if (!jobId) {
+    return false;
+  }
+
+  const processedAt = processedJobs.get(jobId);
+  if (!processedAt) {
+    return false;
+  }
+
+  if (Date.now() - processedAt > processedJobTtlMs) {
+    processedJobs.delete(jobId);
+    return false;
+  }
+
+  return true;
+}
+
+async function rewriteBookmark(payload) {
+  if (payload.operation !== "created" || payload.type !== "link") {
+    return { skipped: true, reason: "unsupported_event" };
+  }
+
+  const rewrittenUrl = toOldRedditUrl(payload.url);
+  if (!rewrittenUrl) {
+    return { skipped: true, reason: "not_www_reddit" };
+  }
+
+  const bookmark = await karakeepRequest(
+    `/api/v1/bookmarks/${payload.bookmarkId}`,
+  );
+
+  const created = await karakeepRequest("/api/v1/bookmarks", {
+    method: "POST",
+    body: JSON.stringify({
+      type: "link",
+      url: rewrittenUrl,
+      title: bookmark.title,
+      archived: bookmark.archived,
+      favourited: bookmark.favourited,
+      note: bookmark.note,
+      summary: bookmark.summary,
+      createdAt: bookmark.createdAt,
+      source: bookmark.source,
+    }),
+  });
+
+  await karakeepRequest(`/api/v1/bookmarks/${payload.bookmarkId}`, {
+    method: "DELETE",
+  });
+
+  return {
+    skipped: false,
+    oldBookmarkId: payload.bookmarkId,
+    newBookmarkId: created?.id,
+    rewrittenUrl,
+  };
+}
+
+const server = http.createServer(async (request, response) => {
+  if (request.url === "/healthz") {
+    return json(response, 200, { ok: true });
+  }
+
+  if (request.url !== "/webhook") {
+    return json(response, 404, { error: "not_found" });
+  }
+
+  if (request.method !== "POST") {
+    return json(response, 405, { error: "method_not_allowed" });
+  }
+
+  const authorization = request.headers.authorization;
+  if (authorization !== `Bearer ${webhookToken}`) {
+    return json(response, 401, { error: "unauthorized" });
+  }
+
+  try {
+    const payload = await collectJson(request);
+
+    if (hasProcessedJob(payload.jobId)) {
+      return json(response, 200, { ok: true, deduplicated: true });
+    }
+
+    const result = await rewriteBookmark(payload);
+    rememberJob(payload.jobId);
+
+    log("Processed Karakeep webhook", {
+      jobId: payload.jobId,
+      bookmarkId: payload.bookmarkId,
+      operation: payload.operation,
+      result,
+    });
+
+    return json(response, 200, { ok: true, result });
+  } catch (error) {
+    console.error("Failed to process Karakeep webhook", error);
+    return json(response, 500, {
+      error: "processing_failed",
+      message: error.message,
+    });
+  }
+});
+
+server.listen(port, () => {
+  log(`Karakeep reddit rewriter listening on ${port}`);
+});
