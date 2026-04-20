@@ -123,50 +123,6 @@ function buildCreateBookmarkPayload(bookmark, rewrittenUrl) {
   return createPayload;
 }
 
-function hasUsefulCrawledContent(content) {
-  return Boolean(
-    content?.description ||
-      content?.htmlContent ||
-      content?.contentAssetId ||
-      content?.pdfAssetId ||
-      content?.fullPageArchiveAssetId,
-  );
-}
-
-function isLikelyBlockedRedditCrawl(bookmark) {
-  const content = bookmark?.content;
-  if (!content || content.type !== "link") {
-    return false;
-  }
-
-  if (content.crawlStatus === "failure") {
-    return true;
-  }
-
-  const text = [bookmark.title, content.title, content.description, content.htmlContent]
-    .filter((value) => typeof value === "string" && value.length > 0)
-    .join("\n")
-    .toLowerCase();
-
-  const blockIndicators = [
-    "whoa there, pardner",
-    "request has been blocked",
-    "you've been blocked",
-    "you have been blocked",
-    "blocked by network security",
-    "continue with google",
-    "continue with email",
-    "log in to reddit",
-    "sign up for reddit",
-  ];
-
-  if (blockIndicators.some((indicator) => text.includes(indicator))) {
-    return true;
-  }
-
-  return content.crawlStatus !== "success" || !hasUsefulCrawledContent(content);
-}
-
 function toOldRedditUrl(rawUrl) {
   const url = new URL(rawUrl);
 
@@ -205,7 +161,7 @@ function hasProcessedJob(jobId) {
 }
 
 async function rewriteBookmark(payload) {
-  if (payload.operation !== "crawled" || payload.type !== "link") {
+  if (payload.operation !== "created" || payload.type !== "link") {
     return { skipped: true, reason: "unsupported_event" };
   }
 
@@ -215,13 +171,8 @@ async function rewriteBookmark(payload) {
   }
 
   const bookmark = await karakeepRequest(
-    `/api/v1/bookmarks/${payload.bookmarkId}?includeContent=true`,
+    `/api/v1/bookmarks/${payload.bookmarkId}`,
   );
-
-  if (!isLikelyBlockedRedditCrawl(bookmark)) {
-    return { skipped: true, reason: "crawl_looks_ok" };
-  }
-
   const createPayload = buildCreateBookmarkPayload(bookmark, rewrittenUrl);
 
   const created = await karakeepRequest("/api/v1/bookmarks", {
