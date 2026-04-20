@@ -161,8 +161,8 @@ function hasProcessedJob(jobId) {
 }
 
 async function rewriteBookmark(payload) {
-  if (payload.operation !== "created" || payload.type !== "link") {
-    return { skipped: true, reason: "unsupported_event" };
+  if (payload.operation !== "created") {
+    return { skipped: true, reason: "unsupported_operation" };
   }
 
   const rewrittenUrl = toOldRedditUrl(payload.url);
@@ -173,6 +173,11 @@ async function rewriteBookmark(payload) {
   const bookmark = await karakeepRequest(
     `/api/v1/bookmarks/${payload.bookmarkId}`,
   );
+
+  if (bookmark?.content?.type !== "link") {
+    return { skipped: true, reason: "unsupported_bookmark_type" };
+  }
+
   const createPayload = buildCreateBookmarkPayload(bookmark, rewrittenUrl);
 
   const created = await karakeepRequest("/api/v1/bookmarks", {
@@ -224,6 +229,7 @@ const server = http.createServer(async (request, response) => {
       jobId: payload.jobId,
       bookmarkId: payload.bookmarkId,
       operation: payload.operation,
+      type: payload.type,
       result,
     });
 
