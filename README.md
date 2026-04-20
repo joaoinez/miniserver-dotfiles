@@ -36,14 +36,6 @@ brew bundle
 ./scripts/run-services.sh
 ```
 
-### qBittorrent note
-
-Set up qBittorrent with Gluetun before using magnet links.
-
-If you skip this, magnet links will not work.
-
-<https://github.com/qdm12/gluetun-wiki/blob/main/setup/popular-apps.md>
-
 ### Sync folder with `~`
 
 #### To link `dotfiles` with `~`
@@ -82,6 +74,35 @@ launchctl load ~/Library/LaunchAgents/com.user.serve-small-llm.plist
 launchctl load ~/Library/LaunchAgents/com.user.start-glances.plist
 ```
 
+### Karakeep Reddit webhook
+
+The Karakeep stack includes a webhook sidecar that rewrites `www.reddit.com` bookmarks to `old.reddit.com`.
+
+Run the stack with the sample `WEBHOOK_TOKEN` and `KARAKEEP_API_TOKEN` values.
+
+Create `KARAKEEP_API_TOKEN` in Karakeep under `User Settings > API Keys`.
+
+Restart the Karakeep services:
+
+```sh
+cd services/karakeep
+restart
+```
+
+Then create a webhook in Karakeep under `User Settings > Webhooks` with:
+
+- URL: `http://karakeep-reddit-rewriter:8080/webhook`
+- Token: the same value as `WEBHOOK_TOKEN`
+- Event: `created`
+
+### qBittorrent note
+
+Set up qBittorrent with Gluetun before using magnet links.
+
+If you skip this, magnet links will not work.
+
+<https://github.com/qdm12/gluetun-wiki/blob/main/setup/popular-apps.md>
+
 ### Install OpenCode
 
 ```bash
@@ -90,6 +111,6 @@ curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path
 
 ## Resources
 
-* <https://wiki.bazarr.media/>
-* <https://github.com/Haxxnet/Compose-Examples>
-* <https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md>
+- <https://wiki.bazarr.media/>
+- <https://github.com/Haxxnet/Compose-Examples>
+- <https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md>
