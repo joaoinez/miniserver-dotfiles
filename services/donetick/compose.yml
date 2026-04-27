@@ -1,0 +1,44 @@
+---
+services:
+  donetick:
+    image: donetick/donetick:v0.1.75
+    container_name: donetick
+    restart: unless-stopped
+    network_mode: service:tailscale-donetick
+    volumes:
+      - donetick:/donetick-data
+      - ./config:/config
+    environment:
+      - DT_ENV=selfhosted
+      - DT_SQLITE_PATH=/donetick-data/donetick.db
+      - TZ=Europe/Amsterdam
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:2021/api/v1/health
+        || exit 1
+      start_period: 1m
+      timeout: 5s
+      interval: 1m
+      retries: 3
+    depends_on:
+      - tailscale-donetick
+
+  tailscale-donetick:
+    image: tailscale/tailscale:latest
+    container_name: ts-donetick
+    hostname: donetick
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_SERVE_CONFIG=/config/ts-serve-config.json
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+      - ./:/config:ro
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+volumes:
+  donetick:
+  tailscale-state:

@@ -78,6 +78,6 @@ services:
     restart: unless-stopped
 
 volumes:
-  meilisearch:
   data:
+  meilisearch:
   tailscale-state:
