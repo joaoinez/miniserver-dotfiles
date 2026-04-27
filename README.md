@@ -78,16 +78,6 @@ sudo install -o root -g wheel -m 644 \
   /Library/LaunchDaemons/com.user.serve-small-llm.plist
 ```
 
-```shell
-sudo install -o root -g wheel -m 644 \
-  root/Library/LaunchDaemons/com.user.start-glances.plist \
-  /Library/LaunchDaemons/com.user.start-glances.plist
-```
-
-```shell
-sudo install -o root -g wheel -m 644 \
-  root/Library/LaunchDaemons/com.user.start-orbstack.plist \
-  /Library/LaunchDaemons/com.user.start-orbstack.plist
 ```
 
 ### Load `launchd` jobs
@@ -104,27 +94,21 @@ sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.serve-chat-llm.p
 sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.serve-small-llm.plist
 ```
 
-```shell
-sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.start-glances.plist
-```
-
-```shell
-sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.start-orbstack.plist
-```
-
-### Remove a system `launchd` daemon
-
-Unload the daemon first:
-
-```shell
-sudo launchctl bootout system /Library/LaunchDaemons/<file>.plist
-```
-
-Remove the plist file:
-
-```shell
-sudo rm /Library/LaunchDaemons/<file>.plist
-```
+> [!NOTE]
+>
+> #### Remove a system `launchd` daemon
+>
+> Unload the daemon first:
+>
+> ```shell
+> sudo launchctl bootout system /Library/LaunchDaemons/<file>.plist
+> ```
+>
+> Then remove the plist file:
+>
+> ```shell
+> sudo rm /Library/LaunchDaemons/<file>.plist
+> ```
 
 ### Karakeep URL webhook
 
@@ -159,6 +143,18 @@ Set up qBittorrent with Gluetun before using magnet links.
 If you skip this, magnet links will not work.
 
 <https://github.com/qdm12/gluetun-wiki/blob/main/setup/popular-apps.md>
+
+### Start Programs and Services
+
+```shell
+~/dotfiles/scripts/start-services.sh
+```
+
+Run this everytime the system reboots:
+
+```shell
+~/dotfiles/scripts/start-programs.sh
+```
 
 ### Install OpenCode
 
