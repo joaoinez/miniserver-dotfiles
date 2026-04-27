@@ -1,7 +1,7 @@
 ---
 services:
   navidrome:
-    image: deluan/navidrome:latest
+    image: deluan/navidrome:0.61.2
     container_name: navidrome
     restart: unless-stopped
     network_mode: service:tailscale-navidrome
