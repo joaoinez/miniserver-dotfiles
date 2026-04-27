@@ -4,4 +4,4 @@
 
 /usr/local/bin/tailscale up
 
-nohup /opt/homebrew/bin/glances -w &
+nohup /opt/homebrew/bin/glances -w &>/dev/null
