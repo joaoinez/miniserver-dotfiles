@@ -2,4 +2,6 @@
 
 /opt/homebrew/bin/orbctl start
 
-/opt/homebrew/bin/glances -w
+/usr/local/bin/tailscale up
+
+nohup /opt/homebrew/bin/glances -w &
