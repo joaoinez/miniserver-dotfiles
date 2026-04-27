@@ -136,13 +136,15 @@ Then create a webhook in Karakeep under `User Settings > Webhooks` with:
 - Token: the same value as `WEBHOOK_TOKEN`
 - Event: `created`
 
-### qBittorrent note
-
-Set up qBittorrent with Gluetun before using magnet links.
-
-If you skip this, magnet links will not work.
-
-<https://github.com/qdm12/gluetun-wiki/blob/main/setup/popular-apps.md>
+> [!NOTE]
+>
+> ### qBittorrent Check
+>
+> Set up qBittorrent with Gluetun before using magnet links.
+>
+> If you skip this, magnet links will not work.
+>
+> <https://github.com/qdm12/gluetun-wiki/blob/main/setup/popular-apps.md>
 
 ### Start Programs and Services
 

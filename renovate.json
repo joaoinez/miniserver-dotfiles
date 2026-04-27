@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "schedule:nonOfficeHours"],
+  "timezone": "Europe/Amsterdam",
+  "additionalReviewers": ["joaoinez"],
+  "enabledManagers": ["docker-compose"],
+  "packageRules": [
+    {
+      "description": "Ignore Docker images pinned to latest",
+      "matchDatasources": ["docker"],
+      "matchCurrentValue": "/^latest$/",
+      "enabled": false
+    },
+    {
+      "description": "Ignore Wakapi Postgres 17 image",
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["services/wakapi/compose.yml"],
+      "matchPackageNames": ["postgres"],
+      "matchCurrentValue": "/^17$/",
+      "enabled": false
+    },
+    {
+      "description": "Ignore Karakeep Node 22-alpine image",
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["services/karakeep/compose.yml"],
+      "matchPackageNames": ["node"],
+      "matchCurrentValue": "/^22-alpine$/",
+      "enabled": false
+    },
+    {
+      "description": "Ignore Karakeep alpine-chrome 124 image",
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["services/karakeep/compose.yml"],
+      "matchPackageNames": ["gcr.io/zenika-hub/alpine-chrome"],
+      "matchCurrentValue": "/^124$/",
+      "enabled": false
+    },
+    {
+      "description": "Ignore Karakeep Meilisearch v1.37.0 image",
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["services/karakeep/compose.yml"],
+      "matchPackageNames": ["getmeili/meilisearch"],
+      "matchCurrentValue": "/^v1\\.37\\.0$/",
+      "enabled": false
+    }
+  ],
+  "docker-compose": {
+    "managerFilePatterns": ["/(^|/)services/[^/]+/compose\\.ya?ml$/"]
+  }
+}
