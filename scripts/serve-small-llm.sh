@@ -11,4 +11,4 @@ export LLAMA_CACHE="/Users/miniserver/Library/Caches/llama.cpp"
   --alias "unsloth/Qwen3.5-0.8B-GGUF" \
   --port 8002 \
   --chat-template-kwargs '{"enable_thinking":false}' \
-  -np 4
+  -np 1
