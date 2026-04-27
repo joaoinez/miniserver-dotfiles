@@ -3,12 +3,15 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>com.user.serve-small-llm</string>
+    <string>com.user.serve-chat-llm</string>
+
+    <key>UserName</key>
+    <string>miniserver</string>
 
     <key>ProgramArguments</key>
     <array>
       <string>/bin/bash</string>
-      <string>/Users/miniserver/dotfiles/scripts/serve-small-llm.sh</string>
+      <string>/Users/miniserver/dotfiles/scripts/serve-chat-llm.sh</string>
     </array>
 
     <key>RunAtLoad</key>
@@ -18,9 +21,9 @@
     <true />
 
     <key>StandardOutPath</key>
-    <string>/tmp/serve-small-llm.log</string>
+    <string>/tmp/serve-chat-llm.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/tmp/serve-small-llm.error.log</string>
+    <string>/tmp/serve-chat-llm.error.log</string>
   </dict>
 </plist>

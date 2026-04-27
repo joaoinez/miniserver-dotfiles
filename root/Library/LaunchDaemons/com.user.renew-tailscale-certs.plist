@@ -3,24 +3,27 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>com.user.serve-chat-llm</string>
+    <string>com.user.renew-tailscale-certs</string>
+
+    <key>UserName</key>
+    <string>miniserver</string>
 
     <key>ProgramArguments</key>
     <array>
       <string>/bin/bash</string>
-      <string>/Users/miniserver/dotfiles/scripts/serve-chat-llm.sh</string>
+      <string>/Users/miniserver/dotfiles/scripts/renew-tailscale-certs.sh</string>
     </array>
 
     <key>RunAtLoad</key>
     <true />
 
-    <key>KeepAlive</key>
-    <true />
+    <key>StartInterval</key>
+    <integer>7776000</integer>
 
     <key>StandardOutPath</key>
-    <string>/tmp/serve-chat-llm.log</string>
+    <string>/tmp/renew-tailscale-certs.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/tmp/serve-chat-llm.error.log</string>
+    <string>/tmp/renew-tailscale-certs.error.log</string>
   </dict>
 </plist>

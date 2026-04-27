@@ -56,22 +56,74 @@ stow --restow .
 stow --restow --adopt .
 ```
 
-### Load `launchd` agents
+### Install system `launchd` files
+
+This repo keeps system-level files under `root/`, but install the daemon plists as real files so `launchd` sees the expected ownership and permissions.
 
 ```shell
-launchctl load ~/Library/LaunchAgents/com.user.renew-tailscale-certs.plist
+sudo install -o root -g wheel -m 644 \
+  root/Library/LaunchDaemons/com.user.renew-tailscale-certs.plist \
+  /Library/LaunchDaemons/com.user.renew-tailscale-certs.plist
 ```
 
 ```shell
-launchctl load ~/Library/LaunchAgents/com.user.serve-chat-llm.plist
+sudo install -o root -g wheel -m 644 \
+  root/Library/LaunchDaemons/com.user.serve-chat-llm.plist \
+  /Library/LaunchDaemons/com.user.serve-chat-llm.plist
 ```
 
 ```shell
-launchctl load ~/Library/LaunchAgents/com.user.serve-small-llm.plist
+sudo install -o root -g wheel -m 644 \
+  root/Library/LaunchDaemons/com.user.serve-small-llm.plist \
+  /Library/LaunchDaemons/com.user.serve-small-llm.plist
 ```
 
 ```shell
-launchctl load ~/Library/LaunchAgents/com.user.start-glances.plist
+sudo install -o root -g wheel -m 644 \
+  root/Library/LaunchDaemons/com.user.start-glances.plist \
+  /Library/LaunchDaemons/com.user.start-glances.plist
+```
+
+```shell
+sudo install -o root -g wheel -m 644 \
+  root/Library/LaunchDaemons/com.user.start-orbstack.plist \
+  /Library/LaunchDaemons/com.user.start-orbstack.plist
+```
+
+### Load `launchd` jobs
+
+```shell
+sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.renew-tailscale-certs.plist
+```
+
+```shell
+sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.serve-chat-llm.plist
+```
+
+```shell
+sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.serve-small-llm.plist
+```
+
+```shell
+sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.start-glances.plist
+```
+
+```shell
+sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.start-orbstack.plist
+```
+
+### Remove a system `launchd` daemon
+
+Unload the daemon first:
+
+```shell
+sudo launchctl bootout system /Library/LaunchDaemons/<file>.plist
+```
+
+Remove the plist file:
+
+```shell
+sudo rm /Library/LaunchDaemons/<file>.plist
 ```
 
 ### Karakeep URL webhook
@@ -79,6 +131,7 @@ launchctl load ~/Library/LaunchAgents/com.user.start-glances.plist
 The Karakeep stack includes a webhook sidecar that rewrites supported bookmark URLs.
 
 Currently it rewrites:
+
 - `www.reddit.com/...` to `old.reddit.com/...`
 - `youtube.com/shorts/<id>` to `youtube.com/watch?v=<id>`
 

@@ -3,24 +3,24 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>com.user.start-glances</string>
+    <string>com.user.start-orbstack</string>
+
+    <key>UserName</key>
+    <string>miniserver</string>
 
     <key>ProgramArguments</key>
     <array>
-      <string>/opt/homebrew/bin/glances</string>
-      <string>-w</string>
+      <string>/opt/homebrew/bin/orbctl</string>
+      <string>start</string>
     </array>
 
     <key>RunAtLoad</key>
     <true />
 
-    <key>KeepAlive</key>
-    <true />
-
     <key>StandardOutPath</key>
-    <string>/tmp/start-glances.log</string>
+    <string>/tmp/start-orbstack.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/tmp/start-glances.error.log</string>
+    <string>/tmp/start-orbstack.error.log</string>
   </dict>
 </plist>

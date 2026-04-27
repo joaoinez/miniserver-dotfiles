@@ -25,6 +25,7 @@ _darcs
 \.DS_Store
 
 ^/docs
+^/root
 ^/scripts
 ^/services
 ^/.opencode

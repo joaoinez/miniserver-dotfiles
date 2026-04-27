@@ -3,24 +3,27 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>com.user.renew-tailscale-certs</string>
+    <string>com.user.serve-small-llm</string>
+
+    <key>UserName</key>
+    <string>miniserver</string>
 
     <key>ProgramArguments</key>
     <array>
       <string>/bin/bash</string>
-      <string>/Users/miniserver/dotfiles/scripts/renew-tailscale-certs.sh</string>
+      <string>/Users/miniserver/dotfiles/scripts/serve-small-llm.sh</string>
     </array>
 
     <key>RunAtLoad</key>
     <true />
 
-    <key>StartInterval</key>
-    <integer>7776000</integer>
+    <key>KeepAlive</key>
+    <true />
 
     <key>StandardOutPath</key>
-    <string>/tmp/renew-tailscale-certs.log</string>
+    <string>/tmp/serve-small-llm.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/tmp/renew-tailscale-certs.error.log</string>
+    <string>/tmp/serve-small-llm.error.log</string>
   </dict>
 </plist>
