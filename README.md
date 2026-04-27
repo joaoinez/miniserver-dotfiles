@@ -74,9 +74,13 @@ launchctl load ~/Library/LaunchAgents/com.user.serve-small-llm.plist
 launchctl load ~/Library/LaunchAgents/com.user.start-glances.plist
 ```
 
-### Karakeep Reddit webhook
+### Karakeep URL webhook
 
-The Karakeep stack includes a webhook sidecar that rewrites `www.reddit.com` bookmarks to `old.reddit.com`.
+The Karakeep stack includes a webhook sidecar that rewrites supported bookmark URLs.
+
+Currently it rewrites:
+- `www.reddit.com/...` to `old.reddit.com/...`
+- `youtube.com/shorts/<id>` to `youtube.com/watch?v=<id>`
 
 Run the stack with the sample `WEBHOOK_TOKEN` and `KARAKEEP_API_TOKEN` values.
 
@@ -91,7 +95,7 @@ restart
 
 Then create a webhook in Karakeep under `User Settings > Webhooks` with:
 
-- URL: `http://karakeep-reddit-rewriter:8080/webhook`
+- URL: `http://karakeep-url-rewriter:8080/webhook`
 - Token: the same value as `WEBHOOK_TOKEN`
 - Event: `created`
 

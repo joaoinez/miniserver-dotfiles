@@ -7,13 +7,9 @@ const karakeepBaseUrl = (
   process.env.KARAKEEP_BASE_URL || "http://tailscale-karakeep:3000"
 ).replace(/\/$/, "");
 
-if (!webhookToken) {
-  throw new Error("WEBHOOK_TOKEN is required");
-}
+if (!webhookToken) throw new Error("WEBHOOK_TOKEN is required");
 
-if (!karakeepApiToken) {
-  throw new Error("KARAKEEP_API_TOKEN is required");
-}
+if (!karakeepApiToken) throw new Error("KARAKEEP_API_TOKEN is required");
 
 const processedJobs = new Map();
 const processedJobTtlMs = 60 * 60 * 1000;
@@ -22,11 +18,39 @@ setInterval(() => {
   const now = Date.now();
 
   for (const [jobId, processedAt] of processedJobs.entries()) {
-    if (now - processedAt > processedJobTtlMs) {
-      processedJobs.delete(jobId);
-    }
+    if (now - processedAt > processedJobTtlMs) processedJobs.delete(jobId);
   }
 }, processedJobTtlMs).unref();
+
+function rewriteRedditUrl(rawUrl) {
+  const url = new URL(rawUrl);
+
+  url.hostname = "old.reddit.com";
+  return url.toString();
+}
+
+function rewriteYoutubeShortUrl(rawUrl) {
+  const url = new URL(rawUrl);
+
+  const match = url.pathname.match(/^\/shorts\/([^/]+)\/?$/);
+  if (!match) return null;
+
+  url.pathname = "/watch";
+  url.search = "";
+  url.searchParams.set("v", match[1]);
+  return url.toString();
+}
+
+function rewriteUrl(rawUrl) {
+  const rewriteUrls = {
+    "reddit.com": rewriteRedditUrl,
+    "www.reddit.com": rewriteRedditUrl,
+    "youtube.com": rewriteYoutubeShortUrl,
+    "www.youtube.com": rewriteYoutubeShortUrl,
+  };
+
+  return rewriteUrls[new URL(rawUrl).hostname.toLowerCase()]?.(rawUrl) ?? null;
+}
 
 function log(message, extra) {
   if (extra === undefined) {
@@ -73,9 +97,7 @@ async function karakeepRequest(path, options = {}) {
     },
   });
 
-  if (response.status === 204) {
-    return null;
-  }
+  if (response.status === 204) return null;
 
   const text = await response.text();
   const data = text ? tryParseJson(text) : null;
@@ -123,34 +145,17 @@ function buildCreateBookmarkPayload(bookmark, rewrittenUrl) {
   return createPayload;
 }
 
-function toOldRedditUrl(rawUrl) {
-  const url = new URL(rawUrl);
-
-  if (url.hostname.toLowerCase() !== "www.reddit.com") {
-    return null;
-  }
-
-  url.hostname = "old.reddit.com";
-  return url.toString();
-}
-
 function rememberJob(jobId) {
-  if (!jobId) {
-    return;
-  }
+  if (!jobId) return;
 
   processedJobs.set(jobId, Date.now());
 }
 
 function hasProcessedJob(jobId) {
-  if (!jobId) {
-    return false;
-  }
+  if (!jobId) return false;
 
   const processedAt = processedJobs.get(jobId);
-  if (!processedAt) {
-    return false;
-  }
+  if (!processedAt) return false;
 
   if (Date.now() - processedAt > processedJobTtlMs) {
     processedJobs.delete(jobId);
@@ -161,22 +166,18 @@ function hasProcessedJob(jobId) {
 }
 
 async function rewriteBookmark(payload) {
-  if (payload.operation !== "created") {
+  if (payload.operation !== "created")
     return { skipped: true, reason: "unsupported_operation" };
-  }
 
-  const rewrittenUrl = toOldRedditUrl(payload.url);
-  if (!rewrittenUrl) {
-    return { skipped: true, reason: "not_www_reddit" };
-  }
+  const rewrittenUrl = rewriteUrl(payload.url);
+  if (!rewrittenUrl) return { skipped: true, reason: "not_rewritable" };
 
   const bookmark = await karakeepRequest(
     `/api/v1/bookmarks/${payload.bookmarkId}`,
   );
 
-  if (bookmark?.content?.type !== "link") {
+  if (bookmark?.content?.type !== "link")
     return { skipped: true, reason: "unsupported_bookmark_type" };
-  }
 
   const createPayload = buildCreateBookmarkPayload(bookmark, rewrittenUrl);
 
@@ -198,29 +199,23 @@ async function rewriteBookmark(payload) {
 }
 
 const server = http.createServer(async (request, response) => {
-  if (request.url === "/healthz") {
-    return json(response, 200, { ok: true });
-  }
+  if (request.url === "/healthz") return json(response, 200, { ok: true });
 
-  if (request.url !== "/webhook") {
+  if (request.url !== "/webhook")
     return json(response, 404, { error: "not_found" });
-  }
 
-  if (request.method !== "POST") {
+  if (request.method !== "POST")
     return json(response, 405, { error: "method_not_allowed" });
-  }
 
   const authorization = request.headers.authorization;
-  if (authorization !== `Bearer ${webhookToken}`) {
+  if (authorization !== `Bearer ${webhookToken}`)
     return json(response, 401, { error: "unauthorized" });
-  }
 
   try {
     const payload = await collectJson(request);
 
-    if (hasProcessedJob(payload.jobId)) {
+    if (hasProcessedJob(payload.jobId))
       return json(response, 200, { ok: true, deduplicated: true });
-    }
 
     const result = await rewriteBookmark(payload);
     rememberJob(payload.jobId);
@@ -249,5 +244,5 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(port, () => {
-  log(`Karakeep reddit rewriter listening on ${port}`);
+  log(`Karakeep url rewriter listening on ${port}`);
 });

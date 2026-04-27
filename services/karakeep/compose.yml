@@ -14,7 +14,7 @@ services:
       DATA_DIR: /data
       NEXTAUTH_URL: https://karakeep.sphynx-ule.ts.net
       WEBHOOK_TOKEN: ${WEBHOOK_TOKEN:?WEBHOOK_TOKEN must be set}
-      CRAWLER_ALLOWED_INTERNAL_HOSTNAMES: karakeep-reddit-rewriter
+      CRAWLER_ALLOWED_INTERNAL_HOSTNAMES: karakeep-url-rewriter
       OPENAI_BASE_URL: https://openrouter.ai/api/v1
       INFERENCE_TEXT_MODEL: openai/gpt-oss-120b:nitro
       INFERENCE_IMAGE_MODEL: openai/gpt-oss-120b:nitro
@@ -22,15 +22,15 @@ services:
       INFERENCE_ENABLE_AUTO_TAGGING: true
       INFERENCE_ENABLE_AUTO_SUMMARIZATION: true
 
-  karakeep-reddit-rewriter:
+  karakeep-url-rewriter:
     image: node:22-alpine
-    container_name: karakeep-reddit-rewriter
+    container_name: karakeep-url-rewriter
     restart: unless-stopped
     command:
       - node
       - /app/server.mjs
     volumes:
-      - ./reddit-rewriter:/app:ro
+      - ./url-rewriter:/app:ro
     environment:
       PORT: 8080
       WEBHOOK_TOKEN: ${WEBHOOK_TOKEN:?WEBHOOK_TOKEN must be set}
