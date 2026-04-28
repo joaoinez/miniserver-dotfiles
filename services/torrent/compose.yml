@@ -8,8 +8,8 @@ services:
       - gluetun
     network_mode: service:gluetun
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${PUID:?PUID must be set}
+      - PGID=${PGID:?PGID must be set}
       - TZ=Europe/Amsterdam
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
@@ -35,7 +35,8 @@ services:
       # example envs based on https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md
       - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=wireguard
-      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY:?WIREGUARD_PRIVATE_KEY must be set}
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY:?WIREGUARD_PRIVATE_KEY
+        must be set}
       - SERVER_COUNTRIES=Netherlands
     volumes:
       - gluetun:/gluetun
