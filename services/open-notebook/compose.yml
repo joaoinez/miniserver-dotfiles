@@ -13,6 +13,7 @@ services:
       - SURREAL_PASSWORD=root
       - SURREAL_NAMESPACE=open_notebook
       - SURREAL_DATABASE=open_notebook
+      - API_URL=http://localhost:5055
     volumes:
       - notebook-data:/app/data
     depends_on:
