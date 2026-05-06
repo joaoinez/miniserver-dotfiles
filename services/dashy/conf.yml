@@ -98,12 +98,6 @@ sections:
           hostname: https://miniserver.sphynx-ule.ts.net:61208
           limit: 80
 
-  - name: Storage
-    widgets:
-      - type: gl-disk-space
-        options:
-          hostname: https://miniserver.sphynx-ule.ts.net:61208
-
   - name: Resources
     items:
       - title: FMHY
