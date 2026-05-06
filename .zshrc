@@ -5,10 +5,8 @@ export EDITOR="nvim"
 export MANPAGER="nvim +Man!"
 export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH=$PATH:$HOME/.local/bin
-export PATH=/Users/miniserver/.opencode/bin:$PATH
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
-export OPENCODE_ENABLE_EXA=1 opencode
 
 autoload -Uz compinit && compinit
 
@@ -38,7 +36,6 @@ alias down="docker compose down"
 alias up="docker compose up --pull always --force-recreate -d"
 alias prune="docker system prune -a --volumes -f"
 alias restart="docker compose down && docker compose up --pull always --force-recreate -d && docker system prune -a --volumes -f"
-alias audio-parser='opencode run /audio-parser'
 alias startup="~/dotfiles/scripts/start-programs.sh"
 
 function y() {

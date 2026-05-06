@@ -78,13 +78,13 @@ sudo install -o root -g wheel -m 644 \
   /Library/LaunchDaemons/com.user.serve-small-llm.plist
 ```
 
-```
+````
 
 ### Load `launchd` jobs
 
 ```shell
 sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.renew-tailscale-certs.plist
-```
+````
 
 ```shell
 sudo launchctl bootstrap system /Library/LaunchDaemons/com.user.serve-chat-llm.plist
@@ -156,12 +156,6 @@ Run this everytime the system reboots:
 
 ```shell
 ~/dotfiles/scripts/start-programs.sh
-```
-
-### Install OpenCode
-
-```bash
-curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path
 ```
 
 ## Resources
