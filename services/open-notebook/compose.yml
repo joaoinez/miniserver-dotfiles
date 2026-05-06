@@ -13,7 +13,7 @@ services:
       - SURREAL_PASSWORD=root
       - SURREAL_NAMESPACE=open_notebook
       - SURREAL_DATABASE=open_notebook
-      - API_URL=http://localhost:5055
+      - API_URL=https://notebook.sphynx-ule.ts.net/api
     volumes:
       - notebook-data:/app/data
     depends_on:

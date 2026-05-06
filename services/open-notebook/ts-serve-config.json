@@ -7,6 +7,9 @@
   "Web": {
     "notebook.sphynx-ule.ts.net:443": {
       "Handlers": {
+        "/api/": {
+          "Proxy": "http://127.0.0.1:5055"
+        },
         "/": {
           "Proxy": "http://127.0.0.1:8502"
         }
