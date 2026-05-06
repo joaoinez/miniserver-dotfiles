@@ -106,9 +106,6 @@ sections:
       - title: Wotaku
         icon: generative
         url: https://wotaku.wiki
-      - title: Wotaku
-        icon: generative
-        url: https://wotaku.wiki
       - title: EXT
         icon: generative
         url: https://ext.to
