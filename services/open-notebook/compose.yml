@@ -1,7 +1,7 @@
 ---
 services:
   opennotebook:
-    image: lfnovo/open_notebook:v1-latest
+    image: lfnovo/open_notebook:1.8.5
     container_name: open-notebook
     restart: unless-stopped
     network_mode: service:tailscale-open-notebook
