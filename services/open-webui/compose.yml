@@ -12,6 +12,11 @@ services:
     depends_on:
       - tailscale-open-webui
 
+  kokoro-tts:
+    container_name: kokoro-tts
+    image: ghcr.io/remsky/kokoro-fastapi-cpu
+    restart: unless-stopped
+
   tailscale-open-webui:
     image: tailscale/tailscale:latest
     container_name: ts-open-webui
