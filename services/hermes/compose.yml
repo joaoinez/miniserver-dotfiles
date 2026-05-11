@@ -19,18 +19,10 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
-    depends_on:
-      - tailscale-hermes
-
-  tailscale-hermes:
-    image: tailscale/tailscale:latest
-    container_name: ts-hermes
-    hostname: hermes
-    environment:
-      - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
-      - TS_STATE_DIR=/var/lib/tailscale
-      - TS_USERSPACE=false
-      - TS_SERVE_CONFIG=/config/ts-serve-config.json
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
     volumes:
       - tailscale-state:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
