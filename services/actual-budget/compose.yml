@@ -1,0 +1,39 @@
+---
+services:
+  actual-budget:
+    image: docker.io/actualbudget/actual-server:latest
+    container_name: actual-budget
+    restart: unless-stopped
+    network_mode: service:tailscale-actual-budget
+    volumes:
+      - actual-data:/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "node src/scripts/health-check.js"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    depends_on:
+      - tailscale-actual-budget
+
+  tailscale-actual-budget:
+    image: tailscale/tailscale:latest
+    container_name: ts-actual-budget
+    hostname: actual-budget
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY:?TS_AUTHKEY must be set}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_SERVE_CONFIG=/config/ts-serve-config.json
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+      - ./:/config:ro
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+volumes:
+  actual-data:
+  tailscale-state:
