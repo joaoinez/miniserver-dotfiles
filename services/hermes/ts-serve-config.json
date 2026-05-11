@@ -1,0 +1,19 @@
+{
+  "TCP": {
+    "443": {
+      "HTTPS": true
+    }
+  },
+  "Web": {
+    "hermes.sphynx-ule.ts.net:443": {
+      "Handlers": {
+        "/api": {
+          "Proxy": "http://127.0.0.1:8642"
+        },
+        "/": {
+          "Proxy": "http://127.0.0.1:9119"
+        }
+      }
+    }
+  }
+}
