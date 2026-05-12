@@ -43,9 +43,15 @@ sections:
       - title: Feishin
         icon: generative
         url: https://feishin.sphynx-ule.ts.net
+      - title: Actual Budget
+        icon: generative
+        url: https://budget.sphynx-ule.ts.net
       - title: WakaTime
         icon: generative
         url: https://wakapi.sphynx-ule.ts.net
+      - title: Hermes
+        icon: generative
+        url: https://hermes.sphynx-ule.ts.net
 
   - name: Services
     items:
