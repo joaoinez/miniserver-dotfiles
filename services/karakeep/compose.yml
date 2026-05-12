@@ -1,6 +1,6 @@
 services:
   karakeep-web:
-    image: ghcr.io/karakeep-app/karakeep:0.31.0
+    image: ghcr.io/karakeep-app/karakeep:0.32.0
     container_name: karakeep-web
     restart: unless-stopped
     network_mode: service:tailscale-karakeep
