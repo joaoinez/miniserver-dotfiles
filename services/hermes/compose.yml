@@ -6,6 +6,8 @@ services:
     restart: unless-stopped
     network_mode: service:tailscale-hermes
     command: gateway run
+    ports:
+      - "8642:8642"
     volumes:
       - ~/.hermes:/opt/data
     environment:
