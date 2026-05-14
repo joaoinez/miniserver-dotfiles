@@ -19,6 +19,7 @@ services:
       WAKAPI_MAIL_ENABLED: "false"
       ENVIRONMENT: "production"
       WAKAPI_INSECURE_COOKIES: "false"
+      WAKAPI_COOKIE_MAX_AGE: "2629746"
     depends_on:
       - wakapi-db
       - tailscale-wakapi
