@@ -1,7 +1,7 @@
 ---
 services:
   hermes:
-    image: nousresearch/hermes-agent:latest
+    image: nousresearch/hermes-agent:sha-ea1d0462cf5ec3799fb0c4b8e39685302e53039b
     container_name: hermes
     restart: unless-stopped
     network_mode: service:tailscale-hermes
@@ -29,7 +29,7 @@ services:
       - tailscale-hermes
 
   tailscale-hermes:
-    image: tailscale/tailscale:latest
+    image: tailscale/tailscale:v1.98.3
     container_name: ts-hermes
     hostname: hermes
     environment:

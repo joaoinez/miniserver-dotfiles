@@ -18,7 +18,7 @@ services:
       - tailscale-actual-budget
 
   tailscale-actual-budget:
-    image: tailscale/tailscale:latest
+    image: tailscale/tailscale:v1.98.3
     container_name: ts-actual-budget
     hostname: actual-budget
     environment:

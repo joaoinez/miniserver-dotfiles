@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
 
   tailscale-open-webui:
-    image: tailscale/tailscale:latest
+    image: tailscale/tailscale:v1.98.3
     container_name: ts-open-webui
     hostname: open-webui
     extra_hosts:

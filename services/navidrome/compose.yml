@@ -10,7 +10,7 @@ services:
       - "/Users/miniserver/Music:/music:ro"
 
   tailscale-navidrome:
-    image: tailscale/tailscale:latest
+    image: tailscale/tailscale:v1.98.3
     container_name: ts-navidrome
     hostname: navidrome
     extra_hosts:
