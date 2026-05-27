@@ -35,40 +35,37 @@ sections:
   - name: Apps
     items:
       - title: Open WebUI
-        icon: generative
+        icon: favicon
         url: https://chat.sphynx-ule.ts.net
       - title: Karakeep
-        icon: generative
+        icon: favicon
         url: https://karakeep.sphynx-ule.ts.net
       - title: Feishin
-        icon: generative
+        icon: favicon
         url: https://feishin.sphynx-ule.ts.net
       - title: Actual Budget
-        icon: generative
+        icon: favicon
         url: https://budget.sphynx-ule.ts.net
       - title: WakaTime
-        icon: generative
+        icon: favicon
         url: https://wakapi.sphynx-ule.ts.net
-      - title: Hermes
-        icon: generative
-        url: https://hermes.sphynx-ule.ts.net
 
   - name: Services
     items:
       - title: Tailscale
-        icon: generative
+        icon: favicon
         url: https://login.tailscale.com/admin
       - title: Glances
         icon: generative
         url: https://miniserver.sphynx-ule.ts.net:61208
       - title: Dozzle
-        icon: generative
+        icon: favicon
         url: https://dozzle.sphynx-ule.ts.net
       - title: Jellyfin
-        icon: generative
+        icon: favicon
         url: https://miniserver.sphynx-ule.ts.net:8920
       - title: Navidrome
-        icon: generative
+        icon: favicon
         url: https://navidrome.sphynx-ule.ts.net
       - title: Qbittorrent
         icon: generative
@@ -107,17 +104,17 @@ sections:
   - name: Resources
     items:
       - title: FMHY
-        icon: generative
+        icon: favicon
         url: https://fmhy.net
       - title: Wotaku
-        icon: generative
+        icon: favicon
         url: https://wotaku.wiki
       - title: EXT
-        icon: generative
+        icon: favicon
         url: https://ext.to
       - title: SeaDex
-        icon: generative
+        icon: favicon
         url: https://releases.moe/about
       - title: Monochrome
-        icon: generative
+        icon: favicon
         url: https://monochrome.tf
