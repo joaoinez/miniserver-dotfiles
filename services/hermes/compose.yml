@@ -1,7 +1,7 @@
 ---
 services:
   hermes:
-    image: nousresearch/hermes-agent:main@sha256:7a47d19ed1d4fa98f178756fd33772c914d9853e414e8366c268773f55517944
+    image: nousresearch/hermes-agent:main@sha256:75298058a7960bcafb94e97549a1061bdb0bb0cd1cd0570d4c685247eb28cb5d
     container_name: hermes
     restart: unless-stopped
     network_mode: service:tailscale-hermes
