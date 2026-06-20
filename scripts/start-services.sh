@@ -12,9 +12,10 @@ for service_dir in "$SERVICES_DIR"/*; do
     cd "$service_dir" || exit
     docker compose down
     docker compose up --pull always --force-recreate -d
-    docker system prune -a --volumes -f
   fi
 done
+
+docker system prune -a --volumes -f
 
 # Return to original directory
 cd "$SCRIPT_DIR" || exit
