@@ -36,7 +36,7 @@ services:
       - wakapi-db-data:/var/lib/postgresql/data
 
   tailscale-wakapi:
-    image: tailscale/tailscale:v1.98.3
+    image: tailscale/tailscale:v1.98.4
     container_name: ts-wakapi
     hostname: wakapi
     environment:

@@ -61,7 +61,7 @@ services:
       - meilisearch:/meili_data
 
   tailscale-karakeep:
-    image: tailscale/tailscale:v1.98.3
+    image: tailscale/tailscale:v1.98.4
     container_name: ts-karakeep
     hostname: karakeep
     environment:
