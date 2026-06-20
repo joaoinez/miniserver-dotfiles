@@ -10,8 +10,9 @@ for service_dir in "$SERVICES_DIR"/*; do
   if [ -d "$service_dir" ]; then
     echo "Starting service in: $(basename "$service_dir")"
     cd "$service_dir" || exit
-    docker compose pull
-    docker compose up -d
+    docker compose down
+    docker compose up --pull always --force-recreate -d
+    docker system prune -a --volumes -f
   fi
 done
 
