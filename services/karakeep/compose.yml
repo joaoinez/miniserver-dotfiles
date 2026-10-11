@@ -38,7 +38,7 @@ services:
       KARAKEEP_BASE_URL: http://tailscale-karakeep:3000
 
   karakeep-chrome:
-    image: ghcr.io/karakeep-app/karakeep-chrome:151.0.7922.47-r1
+    image: ghcr.io/karakeep-app/karakeep-chrome:154.0.8037.57-r1
     container_name: karakeep-chrome
     restart: unless-stopped
     init: true
